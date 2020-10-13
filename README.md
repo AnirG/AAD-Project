@@ -3,3 +3,8 @@ A webapp with scalable implementation of blockchain technology which entails man
 
 
 Credits will be added at the end of the project.
+
+
+# TODO:
+
+Add LaTeX analysis of bcrypt algorithm.
