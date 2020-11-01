@@ -1,0 +1,24 @@
+
+1 node == 1 transaction   ( INITIAL ASSUMPTION )
+
+Code the below PROVIDED a transaction has been authorized.
+
+<----- adding nodes without any pow yet ------->
+
+1. Basic class object structuring.
+2. Import relevant DB related stuff.
+3. Design DB for the public ledger.
+4. Standardize on the format of a transaction within a block.
+5. Try hashing the data from SHA256.py. 
+6. Test out by adding nodes.
+
+<----- adding nodes with consideration of pow -------> 
+
+need to be thought of
+
+Integrate all this to the front end.
+
+
+All the above are wrt to the miner. 
+
+Implementation wrt to user ie initiating a transaction with digital signature will be done after this. 

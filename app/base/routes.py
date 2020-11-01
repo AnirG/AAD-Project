@@ -95,6 +95,13 @@ def shutdown():
     func()
     return 'Server shutting down...'
 
+
+# implementations
+
+@blueprint.route('/ledger')
+def baseTemp():
+    return render_template('layouts/base.html')
+
 ## Errors
 
 @login_manager.unauthorized_handler
