@@ -1,23 +1,7 @@
-from SHA256 import SHA256
+# create entries for the ledger table after authenticating.
+# TODO: integrate with flask with db later.
 
-
-# class Block(db.Model){
-
-#     id = Column(Integer, primary_key=True, autoincrement=True)
-#     payer = Column(String)
-#     recipient = Column(String)
-#     amount = Column(Float)
-#     prevHash = Column(String)
-
-# }
-
-class Block():
-    def __init__(self,id, payer, recipient, amount, prevHash):
-        self.id = id
-        self.payer = payer
-        self.recipient = recipient
-        self.amount = amount
-        self.prevHash = prevHash
-
-def printBlockContents(Block):
-    print(Block.id, Block.payer, Block.recipient, Block.amount, Block.prevHash)
+def initiateTransaction():
+    payer = 
+    paid_to = 
+    

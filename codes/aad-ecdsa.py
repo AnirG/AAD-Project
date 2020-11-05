@@ -14,6 +14,8 @@ def verify_Signature(message, signature, publicKey):
     return (Ecdsa.verify(message, signature, publicKey))
 
 
+# redirect to this when user opts in for crypto-part.
+
 """
 pr1,pb1 = generate_KeyPair()
 print(pr1,pb1)
