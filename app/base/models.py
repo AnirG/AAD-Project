@@ -52,6 +52,28 @@ class User_Crypto(db.Model):
         self.public_key = pbk
         self.id = id
 
+class Public_Ledger(db.Model):
+
+    __tablename__ = 'Public_Ledger'
+
+    id = Column(Integer, primary_key=True)
+    pbk_sender = Column(String) 
+    pbk_receiver = Column(String) 
+    pvk_sender = Column(String) 
+    amount = Column(String) 
+    date = Column(String) 
+    comments = Column(String) 
+    current_hash = Column(String)
+    prev_hash = Column(String)
+    nonce = Column(String)
+    digital_signature = Column(String)
+
+    def(self, ):
+
+        
+
+
+
 
 
 @login_manager.user_loader

@@ -119,7 +119,7 @@ def register_for_crypto():
 
         pvk, pbk = generate_KeyPair()
         id = User.query.filter_by(username=current_username).first().id
-        print(type(pvk), type(pbk), id)
+       # print(type(pvk), type(pbk), id)
         user = User_Crypto(current_username, pvk, pbk, id)
         db.session.add(user)
         db.session.commit()
