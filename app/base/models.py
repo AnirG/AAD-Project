@@ -6,7 +6,6 @@ Copyright (c) 2019 - present AppSeed.us
 
 from flask_login import UserMixin
 from sqlalchemy import Binary, Column, Integer, String
-
 from app import db, login_manager
 
 from app.base.util import hash_pass
@@ -36,6 +35,23 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return str(self.username)
+
+
+class User_Crypto(db.Model):
+
+    __tablename__ = 'User_Crypto'
+
+    id = Column(Integer, primary_key=True)      # same as the User class
+    username = Column(String, unique=True)      
+    private_key = Column(String, unique=True)   # store the hash of private key actually. FOR NOW, NOT HASHING FOR DEBUG PURPOSES.. 
+    public_key = Column(String, unique=True)
+
+    def __init__(self, username, pvk, pbk, id):
+        self.username = username
+        self.private_key = pvk
+        self.public_key = pbk
+        self.id = id
+
 
 
 @login_manager.user_loader

@@ -4,6 +4,9 @@ License: MIT
 Copyright (c) 2019 - present AppSeed.us
 """
 
+import sys  
+sys.path.append('../../codes')
+
 from flask import jsonify, render_template, redirect, request, url_for
 from flask_login import (
     current_user,
@@ -12,10 +15,12 @@ from flask_login import (
     logout_user
 )
 
+from app.codes.ecdsa_string import generate_KeyPair
+
 from app import db, login_manager
 from app.base import blueprint
 from app.base.forms import LoginForm, CreateAccountForm
-from app.base.models import User
+from app.base.models import User, User_Crypto
 
 from app.base.util import verify_pass
 
@@ -98,9 +103,31 @@ def shutdown():
 
 # implementations
 
-@blueprint.route('/ledger')
-def baseTemp():
-    return render_template('layouts/base.html')
+@blueprint.route('/register_for_crypto', methods=['GET','POST'])
+def register_for_crypto():
+
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
+    if request.method == "POST":
+
+        current_username = current_user._get_current_object().username
+
+        if User_Crypto.query.filter_by(username=current_username).first():
+           return render_template('views/pay.html', msg='Already Registered!') 
+
+
+        pvk, pbk = generate_KeyPair()
+        id = User.query.filter_by(username=current_username).first().id
+        print(type(pvk), type(pbk), id)
+        user = User_Crypto(current_username, pvk, pbk, id)
+        db.session.add(user)
+        db.session.commit()
+
+
+        return render_template('views/pay.html', msg='Registered!')
+    else:
+        return render_template('views/pay.html')
 
 ## Errors
 
