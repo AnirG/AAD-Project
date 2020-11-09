@@ -63,17 +63,22 @@ class Public_Ledger(db.Model):
     amount = Column(String) 
     date = Column(String) 
     comments = Column(String) 
-    current_hash = Column(String)
     prev_hash = Column(String)
+    current_hash = Column(String)
     nonce = Column(String)
     digital_signature = Column(String)
 
-    def(self, ):
-
-        
-
-
-
+    def __init__(self,b,c,d,e,f,g,h,i,j,k):
+        self.pbk_sender = b
+        self.pbk_receiver = c 
+        self.pvk_sender = d
+        self.amount = e
+        self.date = f
+        self.comments = g 
+        self.current_hash = h
+        self.prev_hash = i
+        self.nonce = j
+        self.digital_signature = k
 
 
 @login_manager.user_loader

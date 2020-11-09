@@ -15,12 +15,13 @@ from flask_login import (
     logout_user
 )
 
-from app.codes.ecdsa_string import generate_KeyPair
-
+from app.codes.ecdsa_string import *
+from app.codes.SHA256 import *
+import random
 from app import db, login_manager
 from app.base import blueprint
 from app.base.forms import LoginForm, CreateAccountForm
-from app.base.models import User, User_Crypto
+from app.base.models import User, User_Crypto, Public_Ledger
 
 from app.base.util import verify_pass
 
@@ -128,6 +129,40 @@ def register_for_crypto():
         return render_template('views/pay.html', msg='Registered!')
     else:
         return render_template('views/pay.html')
+
+
+@blueprint.route('public_ledger', methods=['GET'])
+def showTable():
+    N = 10
+
+    prev_hash = 0x00
+
+    for i in range(N):
+        pbk_sender = generate_KeyPair()[1]
+        pvk_sender = generate_KeyPair()[0]
+        pbk_receiver = generate_KeyPair()[1]
+        amount = str(random.randint(10,1000))
+        date = '31/10/2020'
+        comments = 'hahah'
+
+        message = pbk_sender + pvk_sender + pbk_receiver + amount + date + comments
+        
+        digital_signature = create_Signature(message, pvk_sender) 
+        
+        nonce = str(random.randint(10,1000))   # to be determined externallysssss
+
+        current_hash = SHA256(message + digital_signature + nonce)
+        
+
+        data = Public_Ledger(pbk_sender,pbk_receiver,pvk_sender,amount,date,comments,prev_hash,current_hash,nonce,digital_signature)
+        
+        prev_hash = current_hash
+       
+        db.session.add(data)
+        db.session.commit() 
+    return render_template('views/pay.html',msg='populated!')
+
+
 
 ## Errors
 
