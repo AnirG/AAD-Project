@@ -1,6 +1,6 @@
-1. Autofill public key if registered already.
 2. Make register page better for the crypto part.
-3. If the public enetered in the make_transaction route doesn't exist, then pop an error.
+
+
 4. Remove PRIVATE KEY field and replace with digital signature directly with some mechanism.
 5. Add wallet balance in User_Cypto db.
 6. Update it after the transaction is initiated.
@@ -13,3 +13,7 @@
 2. Implement POW. 
 
 2. Make a table for this public ledger db.
+
+
+More ideas --->
+

@@ -203,9 +203,12 @@ def createTransaction():
         
         try:
             digital_sig = create_Signature(message, private_key)
-            data = Transaction_Crypto(public_key, receiver_public_key, amount, today_date, comments, digital_sig)
-            db.session.add(data)
-            db.session.commit() 
+            if verify_Signature(message, digital_sig, public_key):
+                data = Transaction_Crypto(public_key, receiver_public_key, amount, today_date, comments, digital_sig)
+                db.session.add(data)
+                db.session.commit()
+            else:
+                msg="Invalid private key!"
         except:
             msg="Invalid private key!"
         
