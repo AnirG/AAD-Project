@@ -20,8 +20,8 @@ from app.codes.SHA256 import *
 import random
 from app import db, login_manager
 from app.base import blueprint
-from app.base.forms import LoginForm, CreateAccountForm
-from app.base.models import User, User_Crypto, Public_Ledger
+from app.base.forms import LoginForm, CreateAccountForm, MakeTransactionCrypto
+from app.base.models import User, User_Crypto, Public_Ledger, Transaction_Crypto
 
 from app.base.util import verify_pass
 
@@ -141,15 +141,15 @@ def showTable():
         pbk_sender = generate_KeyPair()[1]
         pvk_sender = generate_KeyPair()[0]
         pbk_receiver = generate_KeyPair()[1]
-        amount = str(random.randint(10,1000))
+        amount = str(random.randint(10,999))
         date = '31/10/2020'
         comments = 'hahah'
 
-        message = pbk_sender + pvk_sender + pbk_receiver + amount + date + comments
+        message = pbk_sender + pbk_receiver + amount + date + comments
         
         digital_signature = create_Signature(message, pvk_sender) 
         
-        nonce = str(random.randint(10,1000))   # to be determined externallysssss
+        nonce = str(random.randint(10,999))   # to be determined externallysssss
 
         current_hash = SHA256(message + digital_signature + nonce)
         
@@ -160,8 +160,49 @@ def showTable():
        
         db.session.add(data)
         db.session.commit() 
+
     return render_template('views/pay.html',msg='populated!')
 
+@blueprint.route('make_transaction_aaa', methods=['GET','POST'])
+def createTransaction():
+
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
+    if request.method == "POST":
+        print("print stuff!")
+
+        form = MakeTransactionCrypto(request.form)
+
+        # print(form['private_key'])
+        
+        if request.form:
+            print("scatter!")
+            # public_key = form.public_key.data
+            # private_key = form.private_key.data
+            
+            private_key, public_key = generate_KeyPair()
+            
+            amount = str(form.amount.data)         # integer
+            receiver_public_key = form.receiver_public_key.data
+            comments = form.comments.data
+
+        # prev_hash = Public_Ledger.query.order_by(id.desc()).first().current_hash   -----> add after mining
+
+            #date = date.today().strftime("%d/%m/%Y")
+            date = '10/10/2021'
+            message = public_key + receiver_public_key + amount + date + comments
+            digital_sig = create_Signature(message, private_key)
+
+            data = Transaction_Crypto(public_key, receiver_public_key, amount, date, comments, digital_sig)
+
+            print("scatter2!")
+
+            db.session.add(data)
+            db.session.commit() 
+
+    
+    return render_template('views/make_transaction.html', form=MakeTransactionCrypto)
 
 
 ## Errors

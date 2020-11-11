@@ -5,7 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 """
 
 from flask_login import UserMixin
-from sqlalchemy import Binary, Column, Integer, String
+from sqlalchemy import Binary, Column, Integer, String, Boolean
 from app import db, login_manager
 
 from app.base.util import hash_pass
@@ -52,26 +52,24 @@ class User_Crypto(db.Model):
         self.public_key = pbk
         self.id = id
 
-class Public_Ledger(db.Model):
+class Public_Ledger(db.Model):    # this will contain info for block
 
     __tablename__ = 'Public_Ledger'
 
     id = Column(Integer, primary_key=True)
     pbk_sender = Column(String) 
     pbk_receiver = Column(String) 
-    pvk_sender = Column(String) 
     amount = Column(String) 
     date = Column(String) 
     comments = Column(String) 
     prev_hash = Column(String)
     current_hash = Column(String)
     nonce = Column(String)
-    digital_signature = Column(String)
+    verify_digital_signature = Column(Boolean, unique=False, default=False)
 
-    def __init__(self,b,c,d,e,f,g,h,i,j,k):
+    def __init__(self,b,c,e,f,g,h,i,j,k):
         self.pbk_sender = b
         self.pbk_receiver = c 
-        self.pvk_sender = d
         self.amount = e
         self.date = f
         self.comments = g 
@@ -79,6 +77,29 @@ class Public_Ledger(db.Model):
         self.prev_hash = i
         self.nonce = j
         self.digital_signature = k
+
+
+class Transaction_Crypto(db.Model):
+
+    __tablename__ = 'Transaction_Crypto'
+
+    id = Column(Integer, primary_key=True)
+    pbk_sender = Column(String) 
+    pbk_receiver = Column(String) 
+    amount = Column(String) 
+    date = Column(String) 
+    comments = Column(String) 
+    digital_signature = Column(String)
+
+    def __init__(self, a, b, d, e, f, g):
+    #id = Column(Integer, primary_key=True)
+        self.pbk_sender = a
+        self.pbk_receiver = b 
+        self.amount = d
+        self.date = e 
+        self.comments = f 
+        self.digital_signature = g
+
 
 
 @login_manager.user_loader
