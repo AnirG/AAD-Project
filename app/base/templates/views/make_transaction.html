@@ -6,12 +6,11 @@
 {% block stylesheets %}{% endblock stylesheets %}
 
 {% block content %}
-    <form method="post">
-    <div class="yoo-height-b30 yoo-height-lg-b30"></div>
-    <div class="container">
-      <div class="yoo-uikits-heading">
-        <h2 class="yoo-uikits-title">Make new transaction</h2>
-      </div>
+<div class="yoo-height-b30 yoo-height-lg-b30"></div>
+<div class="container">
+  <div class="yoo-uikits-heading">
+    <h2 class="yoo-uikits-title">Make new transaction</h2>
+  </div>
     </div>
     <div class="yoo-height-b30 yoo-height-lg-b30"></div>
     <div class="container">
@@ -31,42 +30,43 @@
                   <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                   <div class="yoo-form-field-wrap yoo-style1">
                   
-            
+                    
+            <form method="post" action="" class="yoo-form yoo-style1">
                   </div>
                   <div class="yoo-height-b25 yoo-height-lg-b25"></div>
                   <div class="yoo-form-field-wrap yoo-style1">
                     <label class="yoo-form-field-label yoo-type1">Your Public Key</label>
                     <div class="input-group form-group-sm">
                     
-                      <input type="text" class="form-control" placeholder="Public key" value="{{ current_user.username }}">
+                      <input type="text" class="form-control" placeholder="Public key" value="{{ current_user.username }}" name="public_key">
                     </div>
                   </div>
                   <div class="yoo-height-b25 yoo-height-lg-b25"></div>
                   <div class="yoo-form-field-wrap yoo-style1">
                     <label class="yoo-form-field-label yoo-type1">Private key</label>
                     <div class="input-group form-group-sm">
-                      <input type="password" class="form-control" placeholder="key" value="">
+                      <input type="password" class="form-control" placeholder="key" value="" name="private_key">
                     </div>
                   </div>                  
                   <div class="yoo-height-b25 yoo-height-lg-b25"></div>
                   <div class="yoo-form-field-wrap yoo-style1">
                     <label class="yoo-form-field-label yoo-type1">Amount</label>
                     <div class="input-group form-group-sm">
-                      <input type="text" class="form-control" placeholder="Amount" value="">
+                      <input type="text" class="form-control" placeholder="Amount" value="" name="amount">
                     </div>
                   </div>
                   <div class="yoo-height-b25 yoo-height-lg-b25"></div>
                   <div class="yoo-form-field-wrap yoo-style1">
                     <label class="yoo-form-field-label yoo-type1">Reciever's Public key</label>
                     <div class="input-group form-group-sm">
-                      <input type="text" class="form-control" placeholder="key" value="">
+                      <input type="text" class="form-control" placeholder="key" value="" name="receiver_public_key">
                     </div>
                   </div>
                   <div class="yoo-height-b25 yoo-height-lg-b25"></div>
                   <div class="yoo-form-field-wrap yoo-style1">
                     <label class="yoo-form-field-label yoo-type1">Comments</label>
                     <div class="input-group form-group-sm">
-                      <input type="text" class="form-control" placeholder="Write something for Reciever" value="">
+                      <input type="text" class="form-control" placeholder="Write something for Reciever" value="" name="comments">
                     </div>
                   </div>
                   
@@ -77,9 +77,10 @@
                 <hr>
                 <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                 <div class="yoo-profile-btn-group yoo-style1">
-                    <button type="submit" name = "register" ripple="ripple" class="yoo-profile-btn yoo-style1 yoo-color1">Update Now</a>
+                    <button type="submit" name = "update_now" ripple="ripple" class="yoo-profile-btn yoo-style1 yoo-color1">Update Now</a>
                   
                 </div>
+              </form>
                 <div class="yoo-height-b20 yoo-height-lg-b20"></div>
               </div>
             </div>
@@ -89,7 +90,6 @@
       </div>
     </div>
     <div class="yoo-height-b60 yoo-height-lg-b60"></div>
-</form>
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->

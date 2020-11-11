@@ -31,10 +31,10 @@ print(p1[0])
 print(p1[1])
 message = "chandan bond"
 
-a = input()
-b = input()
+# a = input()
+# b = input()
 
-sign = create_Signature(message, a)
-print(sign)
+# sign = create_Signature(message, a)
+# print(sign)
 
-print(verify_Signature(message, sign, b))
+# print(verify_Signature(message, sign, b))

@@ -15,7 +15,7 @@ from flask_login import (
     logout_user
 )
 
-from app.codes.ecdsa_string import *
+from app.codes.ecdsa_string_latest import *
 from app.codes.SHA256 import *
 import random
 from app import db, login_manager
@@ -24,6 +24,8 @@ from app.base.forms import LoginForm, CreateAccountForm, MakeTransactionCrypto
 from app.base.models import User, User_Crypto, Public_Ledger, Transaction_Crypto
 
 from app.base.util import verify_pass
+
+from datetime import date
 
 @blueprint.route('/')
 def route_default():
@@ -169,37 +171,31 @@ def createTransaction():
     if not current_user.is_authenticated:
         return redirect(url_for('base_blueprint.login'))
 
-    if request.method == "POST":
-        print("print stuff!")
+    form = MakeTransactionCrypto(request.form)
 
-        form = MakeTransactionCrypto(request.form)
-
-        # print(form['private_key'])
+   # print(form['private_key'])
         
-        if request.form:
-            print("scatter!")
-            # public_key = form.public_key.data
-            # private_key = form.private_key.data
-            
-            private_key, public_key = generate_KeyPair()
-            
-            amount = str(form.amount.data)         # integer
-            receiver_public_key = form.receiver_public_key.data
-            comments = form.comments.data
+    if 'update_now' in request.form:
+        print("hahaha")
 
-        # prev_hash = Public_Ledger.query.order_by(id.desc()).first().current_hash   -----> add after mining
+        public_key = request.form.get('public_key')
+        private_key = request.form.get('private_key')
+        amount = request.form.get('amount')       # integer
+        receiver_public_key = request.form.get('receiver_public_key')
+        comments = request.form.get('comments')
 
-            #date = date.today().strftime("%d/%m/%Y")
-            date = '10/10/2021'
-            message = public_key + receiver_public_key + amount + date + comments
-            digital_sig = create_Signature(message, private_key)
+        #prev_hash = Public_Ledger.query.order_by(id.desc()).first().current_hash   -----> add after mining
+        today = date.today()
+        today_date = today.strftime("%d/%m/%Y")
+        message = public_key + receiver_public_key + amount + today_date + comments
+        
+        digital_sig = create_Signature(message, private_key)
 
-            data = Transaction_Crypto(public_key, receiver_public_key, amount, date, comments, digital_sig)
+        data = Transaction_Crypto(public_key, receiver_public_key, amount, today_date, comments, digital_sig)
+        print("Chandan bond\n")
 
-            print("scatter2!")
-
-            db.session.add(data)
-            db.session.commit() 
+        db.session.add(data)
+        db.session.commit() 
 
     
     return render_template('views/make_transaction.html', form=MakeTransactionCrypto)
