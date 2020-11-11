@@ -173,32 +173,50 @@ def createTransaction():
 
     form = MakeTransactionCrypto(request.form)
 
+    # if User_Crypto.query.filter_by(username=current_username).first():
+    #     return render_template('views/make_transaction.html', msg='Make an account dumbass!') 
+
+    current_username = current_user._get_current_object().username
+
+    user = User_Crypto.query.filter_by(username=current_username).first()
+
    # print(form['private_key'])
+    msg=""
         
     if 'update_now' in request.form:
-        print("hahaha")
 
-        public_key = request.form.get('public_key')
+        public_key = request.form.get('public_key')    # hardcoded
         private_key = request.form.get('private_key')
         amount = request.form.get('amount')       # integer
         receiver_public_key = request.form.get('receiver_public_key')
-        comments = request.form.get('comments')
 
-        #prev_hash = Public_Ledger.query.order_by(id.desc()).first().current_hash   -----> add after mining
+        recepient_user = User_Crypto.query.filter_by(public_key=receiver_public_key).first()
+
+
+        if not recepient_user or recepient_user == user:
+            msg = "Invalid receiver public key!"
+
+        comments = request.form.get('comments')
         today = date.today()
         today_date = today.strftime("%d/%m/%Y")
         message = public_key + receiver_public_key + amount + today_date + comments
         
-        digital_sig = create_Signature(message, private_key)
+        try:
+            digital_sig = create_Signature(message, private_key)
+            data = Transaction_Crypto(public_key, receiver_public_key, amount, today_date, comments, digital_sig)
+            db.session.add(data)
+            db.session.commit() 
+        except:
+            msg="Invalid private key!"
+        
+        
+        
+        
+        #digital_sig = create_Signature(message, private_key)
 
-        data = Transaction_Crypto(public_key, receiver_public_key, amount, today_date, comments, digital_sig)
-        print("Chandan bond\n")
-
-        db.session.add(data)
-        db.session.commit() 
 
     
-    return render_template('views/make_transaction.html', form=MakeTransactionCrypto)
+    return render_template('views/make_transaction.html', form=MakeTransactionCrypto, public_key = user.public_key, msg=msg)
 
 
 ## Errors
