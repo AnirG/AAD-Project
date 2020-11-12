@@ -45,12 +45,14 @@ class User_Crypto(db.Model):
     username = Column(String, unique=True)      
     private_key = Column(String, unique=True)   # store the hash of private key actually. FOR NOW, NOT HASHING FOR DEBUG PURPOSES.. 
     public_key = Column(String, unique=True)
+    net_balance = Column(String)
 
     def __init__(self, username, pvk, pbk, id):
         self.username = username
         self.private_key = pvk
         self.public_key = pbk
         self.id = id
+        self.net_balance = 1000
 
 class Public_Ledger(db.Model):    # this will contain info for block
 
