@@ -3,179 +3,67 @@
 {% block content %}   
 <div class="yoo-height-b30 yoo-height-lg-b30"></div>
 <div class="container">
-  <div class="yoo-uikits-heading">
-    <h2 class="yoo-uikits-title">Miner Pool</h2>
-  </div>
+    <div class="yoo-uikits-heading">
+        <h2 class="yoo-uikits-title">Miner Pool</h2>
+    </div>
 </div>
 <div class="yoo-height-b30 yoo-height-lg-b30"></div>
 <div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="yoo-card yoo-style1">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="yoo-card yoo-style1">
 
-      </div>
-      <div class="yoo-height-b30 yoo-height-lg-b30"></div>
-      <div class="yoo-card yoo-style1">
-        <div class="yoo-card-heading">
-          <div class="yoo-card-heading-left">
-            <h2 class="yoo-card-title">Digital Signatures</h2>
-          </div>
-          <div class="yoo-card-heading-right">
-            <button type="button" class="yoo-card-btn" data-toggle="modal" data-target="#stripedRows"><ion-icon name="code"></ion-icon></button>
-
-
-
-
-            
-            <!-- Code Modal -->
-            <div class="modal fade" id="BorderlessTable">
-              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <h5 class="modal-title">Bordered table</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <ion-icon name="close"></ion-icon>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
             </div>
-          </div>
-        </div>
-        <div class="yoo-card-body">
-          <div class="yoo-padd-lr-20">
-            <div class="yoo-height-b20 yoo-height-lg-b20"></div>
-            <table class="table table-borderless">
-              <thead>
-    
-                
-              {% for obj in query %}
-              <tr>
-              <!-- working -->
-              <!-- <td><button  class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)"> {{ dg }} </td> -->
-              <!-- <td><button  class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)"></td> -->
-               <!-- <td> 
-                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <ion-icon name="logo-buffer"></ion-icon>
-                </button>
-                </td> -->
-                <!-- working -->
-    
-
-              <td>
-
-                <div class="yoo-card-heading-right">
-                  <button type="button" class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)" data-toggle="modal" data-target="#{{obj.id}}">  {{ obj.digital_signature }}   </button> 
-
-                   <div class="modal fade" id="{{obj.id}}">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">General Table</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <ion-icon name="close"></ion-icon>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          
-                          {{ obj.comments}}
-                
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
+            <div class="yoo-height-b30 yoo-height-lg-b30"></div>
+            <div class="yoo-card yoo-style1">
+                <div class="yoo-card-heading">
+                    <div class="yoo-card-heading-left">
+                        <h2 class="yoo-card-title">Digital Signatures</h2>
                     </div>
-                  </div>
                 </div>
-              </div> 
-    
+                <div class="yoo-card-body">
+                    <div class="yoo-padd-lr-20">
+                        <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+                        <table class="table table-borderless">
 
-              </td>
+                            {% for obj in query %}
+                            <tr>
+                                <td>
 
 
 
-              </tr>
-              {% endfor %}
 
-              </tbody>
-            </table>
-            <div class="yoo-height-b20 yoo-height-lg-b20"></div>
-          </div>
+                            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modal{{ loop.index }}">{{ obj.digital_signature }}</button>
+                              <div class="modal fade" id="modal{{ loop.index}}">
+                                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title">Bordered table</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <ion-icon name="close"></ion-icon>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            {{ obj.comments }}
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+
+
+                        </table>
+                        <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-  </div>
-</div>
-<div class="yoo-height-b30 yoo-height-lg-b30"></div>
+    </div>
+    <div class="yoo-height-b30 yoo-height-lg-b30"></div>
 
-
-
-
-
-{% endblock content %}  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-  <ion-icon name="close"></ion-icon>
-</button>
-</div>
-<div class="modal-body">
-<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- On rows --&gt;</span>
-<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-active"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
-
-<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-primary"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
-<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-secondary"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
-<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-success"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
-<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-danger"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
-<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-warning"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
-<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-info"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
-<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-light"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
-<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-dark"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
-
-<span class="c">&lt;!-- On cells (`td` or `th`) --&gt;</span>
-<span class="nt">&lt;tr&gt;</span>
-<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-active"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
-
-<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-primary"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
-<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-secondary"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
-<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-success"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
-<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-danger"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
-<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-warning"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
-<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-info"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
-<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-light"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
-<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-dark"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
-<span class="nt">&lt;/tr&gt;</span></code></pre></figure>
-</div>
+    {% endblock content %}  
