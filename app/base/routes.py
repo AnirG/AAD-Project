@@ -136,14 +136,17 @@ def register_for_crypto():
 def showMiningPool():
     print("haha")
     query = Transaction_Crypto.query.all()
+    dg = []
     for i in query:
-        print("Digital signature: ",i.digital_signature)
-        print("public key sender: ",i.pbk_sender)
-        print("public key receiver: ",i.pbk_receiver)
-        print("amount: ",i.amount)
-        print("date: ",i.date)
-        print("comments: ",i.comments)
-    return render_template('views/pay.html')
+        # print("Digital signature: ",i.digital_signature)
+        # print("public key sender: ",i.pbk_sender)
+        # print("public key receiver: ",i.pbk_receiver)
+        # print("amount: ",i.amount)
+        # print("date: ",i.date)
+        # print("comments: ",i.comments)
+        dg.append(i.digital_signature)
+
+    return render_template('views/mining_pool.html', list=dg)
 
 
 
@@ -182,7 +185,7 @@ def createTransaction():
 
         public_key = request.form.get('public_key')    # hardcoded
         private_key = request.form.get('private_key')
-        amount = request.form.get('amount')       # integer
+        amount = request.form.get('amount')      # integer
         receiver_public_key = request.form.get('receiver_public_key')
 
         recepient_user = User_Crypto.query.filter_by(public_key=receiver_public_key).first()
@@ -200,7 +203,7 @@ def createTransaction():
             try:
                 digital_sig = create_Signature(message, private_key)
 
-                if(user.net_balance < amount):
+                if(float(user.net_balance) < float(amount)):
                     msg_warning = "Funds insufficient!"
 #            
                 elif verify_Signature(message, digital_sig, public_key):
