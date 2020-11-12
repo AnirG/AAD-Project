@@ -149,7 +149,7 @@ def showMiningPool():
 
     
 
-    return render_template('views/mining_pool.html', list=dg, username=query)
+    return render_template('views/mining_pool.html', list=dg, query=query)
 
 
 

@@ -54,7 +54,7 @@
               <thead>
     
                 
-              {% for dg in list %}
+              {% for obj in query %}
               <tr>
               <!-- working -->
               <!-- <td><button  class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)"> {{ dg }} </td> -->
@@ -70,9 +70,9 @@
               <td>
 
                 <div class="yoo-card-heading-right">
-                  <button type="button" class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)" data-toggle="modal" data-target="#general-table">  {{ dg }}   </button>
-                  <!-- Code Modal -->
-                  <div class="modal fade" id="general-table">
+                  <button type="button" class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)" data-toggle="modal" data-target="#{{obj.id}}">  {{ obj.digital_signature }}   </button> 
+
+                   <div class="modal fade" id="{{obj.id}}">
                     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                       <div class="modal-content">
                         <div class="modal-header">
@@ -83,7 +83,7 @@
                         </div>
                         <div class="modal-body">
                           
-                          {{ username.commesnts }}
+                          {{ obj.comments}}
                 
                         </div>
                         <div class="modal-footer">
@@ -93,8 +93,8 @@
                     </div>
                   </div>
                 </div>
-              </div>
-
+              </div> 
+    
 
               </td>
 
