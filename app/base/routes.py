@@ -132,38 +132,30 @@ def register_for_crypto():
     else:
         return render_template('views/pay.html')
 
+# @blueprint.route('mining_pool',methods=['GET'])
+# def showMiningPool():
 
-@blueprint.route('public_ledger', methods=['GET'])
-def showTable():
-    N = 10
+#     # query = Transaction_Crypto.query()
 
-    prev_hash = 0x00
+#     # for digital_signature in query:
+#     #     print(digital_signature)
 
-    for i in range(N):
-        pbk_sender = generate_KeyPair()[1]
-        pvk_sender = generate_KeyPair()[0]
-        pbk_receiver = generate_KeyPair()[1]
-        amount = str(random.randint(10,999))
-        date = '31/10/2020'
-        comments = 'hahah'
 
-        message = pbk_sender + pbk_receiver + amount + date + comments
-        
-        digital_signature = create_Signature(message, pvk_sender) 
-        
-        nonce = str(random.randint(10,999))   # to be determined externallysssss
+#     # render_template('views/pay.html')
 
-        current_hash = SHA256(message + digital_signature + nonce)
-        
 
-        data = Public_Ledger(pbk_sender,pbk_receiver,pvk_sender,amount,date,comments,prev_hash,current_hash,nonce,digital_signature)
-        
-        prev_hash = current_hash
-       
-        db.session.add(data)
-        db.session.commit() 
 
-    return render_template('views/pay.html',msg='populated!')
+# @blueprint.route('public_ledger', methods=['GET'])
+# def showTable():
+
+# # parse the public ledger db data to html
+
+# @blueprint.route('mine',methods=['GET','POST'])
+# def mine():
+
+
+
+
 
 @blueprint.route('make_transaction_aaa', methods=['GET','POST'])
 def createTransaction():
@@ -205,21 +197,23 @@ def createTransaction():
         if not msg_warning:
             try:
                 digital_sig = create_Signature(message, private_key)
-                if verify_Signature(message, digital_sig, public_key):
+
+                if(user.net_balance < amount):
+                    msg_warning = "Funds insufficient!"
+#            
+                elif verify_Signature(message, digital_sig, public_key):
                     data = Transaction_Crypto(public_key, receiver_public_key, amount, today_date, comments, digital_sig)
                     db.session.add(data)
                     db.session.commit()
+
                     msg_success="Added to the miner pool!"
+
                 else:
                     msg_warning="Invalid private key!"
             except:
                 msg_warning="Invalid private key!"
-        
-        
-        
-        
+                
         #digital_sig = create_Signature(message, private_key)
-
 
     
     return render_template('views/make_transaction.html', form=MakeTransactionCrypto, public_key = user.public_key, msg_success=msg_success, msg_warning=msg_warning)

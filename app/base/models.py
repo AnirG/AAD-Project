@@ -6,6 +6,7 @@ Copyright (c) 2019 - present AppSeed.us
 
 from flask_login import UserMixin
 from sqlalchemy import Binary, Column, Integer, String, Boolean
+import sqlalchemy
 from app import db, login_manager
 
 from app.base.util import hash_pass
