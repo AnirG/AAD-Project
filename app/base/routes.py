@@ -132,16 +132,18 @@ def register_for_crypto():
     else:
         return render_template('views/pay.html')
 
-# @blueprint.route('mining_pool',methods=['GET'])
-# def showMiningPool():
-
-#     # query = Transaction_Crypto.query()
-
-#     # for digital_signature in query:
-#     #     print(digital_signature)
-
-
-#     # render_template('views/pay.html')
+@blueprint.route('mining_pool',methods=['GET'])
+def showMiningPool():
+    print("haha")
+    query = Transaction_Crypto.query.all()
+    for i in query:
+        print("Digital signature: ",i.digital_signature)
+        print("public key sender: ",i.pbk_sender)
+        print("public key receiver: ",i.pbk_receiver)
+        print("amount: ",i.amount)
+        print("date: ",i.date)
+        print("comments: ",i.comments)
+    return render_template('views/pay.html')
 
 
 
