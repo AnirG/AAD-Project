@@ -104,7 +104,7 @@ def shutdown():
     return 'Server shutting down...'
 
 
-# implementations
+# Crypto Implementations
 
 @blueprint.route('/register_for_crypto', methods=['GET','POST'])
 def register_for_crypto():
