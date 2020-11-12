@@ -75,11 +75,14 @@
                   <div class="yoo-height-b60 yoo-height-lg-b60"></div>
 ->
                 <hr>
-                {% if msg %}
+                {% if msg_warning %}
                 <div class="alert alert-warning"> 
-                  <strong>Warning!</strong> Error shit worked! {{ msg }} .
+                  <strong>Warning!</strong> {{ msg_warning }} .
                 </div>    
-                {% else %}
+                {% elif msg_success %}
+                <div class="alert alert-success"> 
+                  <strong>Success!</strong> {{ msg_success }} .
+                </div> 
                 {% endif %}
               
 

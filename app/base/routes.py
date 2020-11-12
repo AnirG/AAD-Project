@@ -181,7 +181,8 @@ def createTransaction():
     user = User_Crypto.query.filter_by(username=current_username).first()
 
    # print(form['private_key'])
-    msg=""
+    msg_success=""
+    msg_warning=""
         
     if 'update_now' in request.form:
 
@@ -194,23 +195,25 @@ def createTransaction():
 
 
         if not recepient_user or recepient_user == user:
-            msg = "Invalid receiver public key!"
+            msg_warning = "Invalid receiver public key!"
 
         comments = request.form.get('comments')
         today = date.today()
         today_date = today.strftime("%d/%m/%Y")
         message = public_key + receiver_public_key + amount + today_date + comments
         
-        try:
-            digital_sig = create_Signature(message, private_key)
-            if verify_Signature(message, digital_sig, public_key):
-                data = Transaction_Crypto(public_key, receiver_public_key, amount, today_date, comments, digital_sig)
-                db.session.add(data)
-                db.session.commit()
-            else:
-                msg="Invalid private key!"
-        except:
-            msg="Invalid private key!"
+        if not msg_warning:
+            try:
+                digital_sig = create_Signature(message, private_key)
+                if verify_Signature(message, digital_sig, public_key):
+                    data = Transaction_Crypto(public_key, receiver_public_key, amount, today_date, comments, digital_sig)
+                    db.session.add(data)
+                    db.session.commit()
+                    msg_success="Added to the miner pool!"
+                else:
+                    msg_warning="Invalid private key!"
+            except:
+                msg_warning="Invalid private key!"
         
         
         
@@ -219,7 +222,7 @@ def createTransaction():
 
 
     
-    return render_template('views/make_transaction.html', form=MakeTransactionCrypto, public_key = user.public_key, msg=msg)
+    return render_template('views/make_transaction.html', form=MakeTransactionCrypto, public_key = user.public_key, msg_success=msg_success, msg_warning=msg_warning)
 
 
 ## Errors

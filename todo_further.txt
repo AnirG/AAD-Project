@@ -2,6 +2,9 @@
 
 
 4. Remove PRIVATE KEY field and replace with digital signature directly with some mechanism.
+
+
+
 5. Add wallet balance in User_Cypto db.
 6. Update it after the transaction is initiated.
 
@@ -17,3 +20,13 @@
 
 More ideas --->
 
+1. Modelling our custom coin value vs some currency based on transaction activities.
+2. 
+
+
+
+
+<------Remember------->
+
+UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='Transaction_Crypto';
+flask run --host=0.0.0.0 --port=5000
