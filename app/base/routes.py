@@ -137,6 +137,7 @@ def showMiningPool():
     print("haha")
     query = Transaction_Crypto.query.all()
     dg = []
+    list_query=[]
     for i in query:
         # print("Digital signature: ",i.digital_signature)
         # print("public key sender: ",i.pbk_sender)
@@ -146,7 +147,9 @@ def showMiningPool():
         # print("comments: ",i.comments)
         dg.append(i.digital_signature)
 
-    return render_template('views/mining_pool.html', list=dg)
+    
+
+    return render_template('views/mining_pool.html', list=dg, username=query)
 
 
 
@@ -157,8 +160,6 @@ def showMiningPool():
 
 # @blueprint.route('mine',methods=['GET','POST'])
 # def mine():
-
-
 
 
 

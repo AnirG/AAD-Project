@@ -22,6 +22,11 @@
           </div>
           <div class="yoo-card-heading-right">
             <button type="button" class="yoo-card-btn" data-toggle="modal" data-target="#stripedRows"><ion-icon name="code"></ion-icon></button>
+
+
+
+
+            
             <!-- Code Modal -->
             <div class="modal fade" id="BorderlessTable">
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -51,12 +56,48 @@
                 
               {% for dg in list %}
               <tr>
-                <!-- <td class="text-center">{{ dg }}</td> -->
-                <!-- <td><button class="btn btn-secondary" input="button"> {{ dg }} </td>
-                <td><button class="btn btn-secondary" input="button"></td>
-                 -->
-              <td><button  class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)"> {{ dg }} </td>
-              <td><button  class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)"></td>
+              <!-- working -->
+              <!-- <td><button  class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)"> {{ dg }} </td> -->
+              <!-- <td><button  class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)"></td> -->
+               <!-- <td> 
+                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <ion-icon name="logo-buffer"></ion-icon>
+                </button>
+                </td> -->
+                <!-- working -->
+    
+
+              <td>
+
+                <div class="yoo-card-heading-right">
+                  <button type="button" class="btn btn-outline-light" ripple-color="rgba(0, 0, 0, 0.3)" data-toggle="modal" data-target="#general-table">  {{ dg }}   </button>
+                  <!-- Code Modal -->
+                  <div class="modal fade" id="general-table">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">General Table</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <ion-icon name="close"></ion-icon>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          
+                          {{ username.commesnts }}
+                
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              </td>
+
 
 
               </tr>
@@ -90,3 +131,51 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <ion-icon name="close"></ion-icon>
+</button>
+</div>
+<div class="modal-body">
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="c">&lt;!-- On rows --&gt;</span>
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-active"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
+
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-primary"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-secondary"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-success"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-danger"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-warning"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-info"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-light"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
+<span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-dark"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/tr&gt;</span>
+
+<span class="c">&lt;!-- On cells (`td` or `th`) --&gt;</span>
+<span class="nt">&lt;tr&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-active"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
+
+<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-primary"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-secondary"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-success"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-danger"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-warning"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-info"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-light"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;td</span> <span class="na">class=</span><span class="s">"table-dark"</span><span class="nt">&gt;</span>...<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;/tr&gt;</span></code></pre></figure>
+</div>
