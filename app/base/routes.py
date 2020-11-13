@@ -136,20 +136,7 @@ def register_for_crypto():
 def showMiningPool():
     print("haha")
     query = Transaction_Crypto.query.all()
-    dg = []
-    list_query=[]
-    for i in query:
-        # print("Digital signature: ",i.digital_signature)
-        # print("public key sender: ",i.pbk_sender)
-        # print("public key receiver: ",i.pbk_receiver)
-        # print("amount: ",i.amount)
-        # print("date: ",i.date)
-        # print("comments: ",i.comments)
-        dg.append(i.digital_signature)
-
-    
-
-    return render_template('views/mining_pool.html', list=dg, query=query)
+    return render_template('views/mining_pool.html', query=query)
 
 
 

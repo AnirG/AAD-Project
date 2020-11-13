@@ -29,22 +29,52 @@
                             {% for obj in query %}
                             <tr>
                                 <td>
-
-
-
-
-                            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modal{{ loop.index }}">{{ obj.digital_signature }}</button>
-                              <div class="modal fade" id="modal{{ loop.index}}">
+                            <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modal1{{ loop.index }}">{{ obj.digital_signature }}</button>
+                              <div class="modal fade" id="modal1{{ loop.index}}">
                                   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                       <div class="modal-content">
                                           <div class="modal-header">
-                                              <h5 class="modal-title">Bordered table</h5>
+                                              <h5 class="modal-title">Transaction Details</h5>
                                               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                   <ion-icon name="close"></ion-icon>
                                               </button>
                                           </div>
                                           <div class="modal-body">
-                                            {{ obj.comments }}
+                                            <figure class="highlight"><pre><code class="language-html" data-lang="html">
+<span class=nt>Digital Signature: </span><span>{{ obj.digital_signature }}</span>
+<span class=nt>Public Key Sender: </span><span>{{ obj.pbk_sender }}</span>
+<span class=nt>Public Key Receiver: </span><span>{{ obj.pbk_receiver }}</span>
+<span class=nt>Amount: </span><span>{{ obj.amount }} CC</span>
+<span class=nt>Comments: </span><span>{{ obj.comments }}</span>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                                </td>
+
+
+                                <!--To show the nounce calculation running in bg-->
+                                <td>
+                                    <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modal1{{ loop.index }}">Mine</button>
+                              <div class="modal fade" id="modal1{{ loop.index}}">
+                                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                      <div class="modal-content">
+                                          <div class="modal-header">
+                                              <h5 class="modal-title">Transaction Details</h5>
+                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                  <ion-icon name="close"></ion-icon>
+                                              </button>
+                                          </div>
+                                          <div class="modal-body">
+                                            <figure class="highlight"><pre><code class="language-html" data-lang="html">
+<span class=nt>Digital Signature: </span><span>{{ obj.digital_signature }}</span>
+<span class=nt>Public Key Sender: </span><span>{{ obj.pbk_sender }}</span>
+<span class=nt>Public Key Receiver: </span><span>{{ obj.pbk_receiver }}</span>
+<span class=nt>Amount: </span><span>{{ obj.amount }} CC</span>
+<span class=nt>Comments: </span><span>{{ obj.comments }}</span>
                                           </div>
                                           <div class="modal-footer">
                                               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
