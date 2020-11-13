@@ -111,9 +111,6 @@ def make_message_schedule(message_block):
         temp = Add( Lower_Sigma_1(output[i-2]) , output[i-7] , Lower_Sigma_0(output[i-15]) , output[i-16] )
         output.append(temp)
     return output
-
-
-
    
 def SHA256(input_str):
     Constant = []
@@ -130,8 +127,6 @@ def SHA256(input_str):
     for message_block in message_blocks:
         message_schedule = make_message_schedule(message_block)
         Hash2 = Hash1
-        binary_answer = ''
-        hexadecimal_answer = ''
         for i in range(0,64):
             T1 = Add( Upper_Sigma_1(Hash2[4]) , Choice(Hash2[4],Hash2[5],Hash2[6]) , Hash2[7] , Constant[i] , message_schedule[i] )
             T2 = Add( Upper_Sigma_0(Hash2[0]) , Majority(Hash2[0],Hash2[1],Hash2[2]) )
@@ -141,33 +136,44 @@ def SHA256(input_str):
             Hash2[4] = Add(Hash2[4],T1)
         for i in range(8):
             Hash1[i] = Add(Hash1[i],Hash2[i])
-        for i in Hash1:
-            temp = format(i,'b')
-            x = 32 - len(temp)
-            if(x>0):
-                for j in range(x):
-                    binary_answer+='0'
-            binary_answer+=temp
-        for i in range(64):
-            temp = 8*(int(binary_answer[i*4])) + 4*(int(binary_answer[(i*4)+1])) + 2*(int(binary_answer[(i*4)+2])) + (int(binary_answer[(i*4)+3]))
-            if(temp == 10):
-                hexadecimal_answer+='a'
-            elif(temp == 11):
-                hexadecimal_answer+='b'
-            elif(temp == 12):
-                hexadecimal_answer+='c'
-            elif(temp == 13):
-                hexadecimal_answer+='d'
-            elif(temp == 14):
-                hexadecimal_answer+='e'
-            elif(temp == 15):
-                hexadecimal_answer+='f'
-            else:
-                hexadecimal_answer+= str(temp)
-        #print(binary_answer)
-        #print(hexadecimal_answer)
-        return binary_answer, hexadecimal_answer
+    for i in Hash1:
+        temp = format(i,'b')
+        x = 32 - len(temp)
+        if(x>0):
+            for j in range(x):
+                binary_answer+='0'
+        binary_answer+=temp
+    for i in range(64):
+        temp = 8*(int(binary_answer[i*4])) + 4*(int(binary_answer[(i*4)+1])) + 2*(int(binary_answer[(i*4)+2])) + (int(binary_answer[(i*4)+3]))
+        if(temp == 10):
+            hexadecimal_answer+='a'
+        elif(temp == 11):
+            hexadecimal_answer+='b'
+        elif(temp == 12):
+            hexadecimal_answer+='c'
+        elif(temp == 13):
+            hexadecimal_answer+='d'
+        elif(temp == 14):
+            hexadecimal_answer+='e'
+        elif(temp == 15):
+            hexadecimal_answer+='f'
+        else:
+            hexadecimal_answer+= str(temp)
+    return binary_answer,hexadecimal_answer
+"""
+block = "MEUCIEQdSkwqVG79R5bfZS90+hkmOWY3nTANBRsgrNyNHi7sAiEA5yWPCvGJEjizHr/1lCRl+/1wVODT/5RHFNeHzfIBsBI=39592648063071157590116197238239764066480680927035385258495828980119423801390.7114760032198288637384638741278633733840708535681369663124565041786471812641.069000654063321388874418396751397728128915477270897575962299376495955173108121.4863641959995750858646482700450885374136729226637712011625938289985634714531.00.0113/11/2020chandan rich1"
+nonce =0
+N = 9
+while True:
+    hashed_block = str(SHA256(block+str(nonce))[0])
+    #print("\n\n hoo \n\n")
+    print("in loop: ",nonce)
+    #print(str(block+nonce))
+    print("hash: ", hashed_block, len(hashed_block))
+    if hashed_block[0:N] == "0"*N:
+        break
+    nonce = nonce + 1
+    
 
-# if __name__ == "__main__":
-#     inp = input()
-#     print(SHA256(inp))
+print("nonce: ", nonce)
+"""
