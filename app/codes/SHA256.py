@@ -130,6 +130,8 @@ def SHA256(input_str):
     for message_block in message_blocks:
         message_schedule = make_message_schedule(message_block)
         Hash2 = Hash1
+        binary_answer = ''
+        hexadecimal_answer = ''
         for i in range(0,64):
             T1 = Add( Upper_Sigma_1(Hash2[4]) , Choice(Hash2[4],Hash2[5],Hash2[6]) , Hash2[7] , Constant[i] , message_schedule[i] )
             T2 = Add( Upper_Sigma_0(Hash2[0]) , Majority(Hash2[0],Hash2[1],Hash2[2]) )
