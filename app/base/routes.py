@@ -137,28 +137,59 @@ def showMiningPool():
     print("haha")
     query = Transaction_Crypto.query.all()
 
-    nonce = "0"
     if request.method == "POST":
         dg = request.form['ss']
+        flag = True
+        print("dg: ", dg)
         
-        pending_transaction = Transaction_Crypto.query.filter_by(digital_signature=dg).first()
-        block = dg + pending_transaction.pbk_sender + pending_transaction.pbk_receiver + str(pending_transaction.amount) + pending_transaction.date + pending_transaction.comments
+        pend_trans = Transaction_Crypto.query.filter_by(digital_signature=dg).first()
+        block = dg + pend_trans.pbk_sender + pend_trans.pbk_receiver + str(pend_trans.amount) + pend_trans.date + pend_trans.comments
 
-        N = 2
-
+        N = 10
+        nonce="-1"
         while True:
+            nonce = str(int(nonce)+1)
             hashed_block = str(SHA256(nonce+block)[0])
             if hashed_block[0:N] == "0"*N:
                 break
-
-            nonce = str(int(nonce)+1)
-            print(str(block+nonce))
-            # print("in loop: ",nonce)
-            # print("hash: ", hashed_block)
         
-    print("nonce: ", nonce)
+        if not Public_Ledger.query.filter_by(digital_signature=dg).first():
 
-    return render_template('views/mining_pool.html', query=query, nonce = nonce)
+            last_block_hash = Public_Ledger.query.order_by(Public_Ledger.id.desc()).first().last_hash
+
+            data = Public_Ledger(pend_trans.pbk.sender,
+                                pend_trans.pbk_receiver,
+                                pend_trans.amount,pend.trans.date, 
+                                pend_trans.comments,
+                                hashed_block,
+                                last_block_hash,
+                                nonce,
+                                dg
+                                )
+                                
+            db.session.add(data)
+            db.session.commit()
+
+            user_sender = User_Crypto.query.filter_by(public_key=pend_trans.pbk_sender).first()
+            user_sender.net_balance -= pend_trans.amount
+            db.session.commit()
+
+            user_receiver = User_Crypto.query.filter_by(public_key=pend_trans.pbk_receiver).first()
+            user_receiver.net_balance += pend_trans.amount
+            db.session.commit()
+
+
+
+        else:
+            return render_template('views/mining_pool.html', query=query, msg="Added to the ledger already!")
+
+
+
+        
+  
+        return render_template('views/mining_pool.html', query=query, nonce=lst)
+    
+    
 
 
 
