@@ -20,15 +20,15 @@ from app.codes.SHA256 import *
 import random
 from app import db, login_manager
 from app.base import blueprint
-from app.base.forms import LoginForm, CreateAccountForm, MakeTransactionCrypto
-from app.base.models_bs import """ fill it        """
+from app.base.forms_bs import friends_form, pending_friends_form, transactions_form, pending_transactions_form
+from app.base.models_bs import friend_bs, friend_requests, confirmed_transactions, pending_transactions
 
 from app.base.util import verify_pass
 
 from datetime import date
 
 
-""" fill it """
+@blueprint.route
 
 ## Errors
 
