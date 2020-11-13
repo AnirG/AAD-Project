@@ -68,7 +68,7 @@ class Public_Ledger(db.Model):    # this will contain info for block
     prev_hash = Column(String)
     current_hash = Column(String)
     nonce = Column(String)
-    verify_digital_signature = Column(Boolean, unique=False, default=False)
+    verify_digital_signature = Column(String)
 
     def __init__(self,b,c,e,f,g,h,i,j,k):
         self.pbk_sender = b
