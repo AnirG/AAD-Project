@@ -21,14 +21,32 @@ import random
 from app import db, login_manager
 from app.base import blueprint
 from app.base.forms_bs import friends_form, pending_friends_form, transactions_form, pending_transactions_form
-from app.base.models_bs import friend_bs, friend_requests, confirmed_transactions, pending_transactions
+from app.base.models_bs import friend_bs, friend_requests, confirmed_transactions, pending_transactions, User_Crypto
 
 from app.base.util import verify_pass
 
 from datetime import date
 
 
-@blueprint.route
+@blueprint.route('friends_list',methods=['GET','POST'])
+def generate_friends_list():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
+    form = friends_form(request.form)
+
+    current_username = current_user._get_current_object().username
+    
+    friends_from = friend_bs.filter_by(current_username=user_id)
+    
+    return render_template('', friends = friends_from.friend_id, amount = friends_from.amount )
+
+@blueprint.route('add_friend',methods=['GET','POST'])
+def add_friend():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+    
+    
 
 ## Errors
 
