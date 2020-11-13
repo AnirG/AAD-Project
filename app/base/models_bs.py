@@ -14,8 +14,8 @@ class friends_bs(db.Model):
     
     __tablname__ = 'friends_bs'
     
-    user_id = Column(Integer)
-    friend_id = Column(Integer)
+    user_id = Column(String)
+    friend_id = Column(String)
     amount = Column(Integer)
     
     def __init__(self, a, b, c):
@@ -27,8 +27,8 @@ class friend_requests(db.Model):
     
     __tablname__ = 'friend_requests'
     
-    user_id = Coulmn(Integer)
-    friend_id = Column(Integer)
+    user_id = Coulmn(String)
+    friend_id = Column(String)
     
     def __init__(self, a, b):
         self.user_id = a
@@ -38,8 +38,8 @@ class confirmed_transactions(db.Model):
     
     __tablname__ = 'confirmed_transactions'
     
-    from_id = Column(Integer)
-    to_id = Column(Integer)
+    from_id = Column(String)
+    to_id = Column(String)
     amount = Column(Integer)
     status = Coulmn(String)
     
@@ -53,8 +53,8 @@ class pending_transactions(db.Model):
     
     __tablname__ = 'pending_transactions'
     
-    from_id = Column(Integer)
-    to_id = Column(Integer)
+    from_id = Column(String)
+    to_id = Column(String)
     amount = Column(integer)
     
     def __init__(self, a, b, c):
