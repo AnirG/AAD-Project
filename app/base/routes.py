@@ -132,11 +132,33 @@ def register_for_crypto():
     else:
         return render_template('views/pay.html')
 
-@blueprint.route('mining_pool',methods=['GET'])
+@blueprint.route('mining_pool',methods=['GET','POST'])
 def showMiningPool():
     print("haha")
     query = Transaction_Crypto.query.all()
-    return render_template('views/mining_pool.html', query=query)
+
+    nonce = "0"
+    if request.method == "POST":
+        dg = request.form['ss']
+        
+        pending_transaction = Transaction_Crypto.query.filter_by(digital_signature=dg).first()
+        block = dg + pending_transaction.pbk_sender + pending_transaction.pbk_receiver + str(pending_transaction.amount) + pending_transaction.date + pending_transaction.comments
+
+        N = 2
+
+        while True:
+            hashed_block = str(SHA256(nonce+block)[0])
+            if hashed_block[0:N] == "0"*N:
+                break
+
+            nonce = str(int(nonce)+1)
+            print(str(block+nonce))
+            # print("in loop: ",nonce)
+            # print("hash: ", hashed_block)
+        
+    print("nonce: ", nonce)
+
+    return render_template('views/mining_pool.html', query=query, nonce = nonce)
 
 
 

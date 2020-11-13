@@ -58,8 +58,10 @@
 
                                 <!--To show the nounce calculation running in bg-->
                                 <td>
-                                    <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modal1{{ loop.index }}">Mine</button>
-                              <div class="modal fade" id="modal1{{ loop.index}}">
+                                <form action="" method="post">
+                                    <button type="submit" class="btn btn-outline-light" value="{{ obj.digital_signature }}" name="ss">Mine</button>
+
+                              <div class="modal fade" id="modal2{{loop.index}}">
                                   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                       <div class="modal-content">
                                           <div class="modal-header">
@@ -70,11 +72,8 @@
                                           </div>
                                           <div class="modal-body">
                                             <figure class="highlight"><pre><code class="language-html" data-lang="html">
-<span class=nt>Digital Signature: </span><span>{{ obj.digital_signature }}</span>
-<span class=nt>Public Key Sender: </span><span>{{ obj.pbk_sender }}</span>
-<span class=nt>Public Key Receiver: </span><span>{{ obj.pbk_receiver }}</span>
-<span class=nt>Amount: </span><span>{{ obj.amount }} CC</span>
-<span class=nt>Comments: </span><span>{{ obj.comments }}</span>
+<span class=nt>Digital Signature: </span><span>{{ nonce }}</span>
+
                                           </div>
                                           <div class="modal-footer">
                                               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -82,6 +81,9 @@
                                       </div>
                                   </div>
                               </div>
+                              </form>
+
+
                                 </td>
                             </tr>
                             {% endfor %}

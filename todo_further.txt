@@ -30,3 +30,9 @@ More ideas --->
 
 UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='Transaction_Crypto';
 flask run --host=0.0.0.0 --port=5000
+
+
+
+
+          
+

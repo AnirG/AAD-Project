@@ -164,8 +164,8 @@ def SHA256(input_str):
                 hexadecimal_answer+= str(temp)
         #print(binary_answer)
         #print(hexadecimal_answer)
-        return hexadecimal_answer
+        return binary_answer, hexadecimal_answer
 
-if __name__ == "__main__":
-    inp = input()
-    print(SHA256(inp))
+# if __name__ == "__main__":
+#     inp = input()
+#     print(SHA256(inp))
