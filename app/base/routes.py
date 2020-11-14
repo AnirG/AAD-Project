@@ -136,32 +136,35 @@ def register_for_crypto():
 def showMiningPool():
     print("haha")
     query = Transaction_Crypto.query.all()
+    msg=""
 
     if request.method == "POST":
         dg = request.form['ss']
-        flag = True
         print("dg: ", dg)
+        lst=[]
+        lst.append(dg)
         
         pend_trans = Transaction_Crypto.query.filter_by(digital_signature=dg).first()
         block = dg + pend_trans.pbk_sender + pend_trans.pbk_receiver + str(pend_trans.amount) + pend_trans.date + pend_trans.comments
 
-        N = 10
+        N = 4
         nonce="-1"
         while True:
             nonce = str(int(nonce)+1)
-            hashed_block = str(SHA256(nonce+block)[0])
-            if hashed_block[0:N] == "0"*N:
+            hashed_block = SHA256(nonce+block)
+            if str(hashed_block[0][0:N]) == "0"*N:
                 break
         
         if not Public_Ledger.query.filter_by(digital_signature=dg).first():
 
-            last_block_hash = Public_Ledger.query.order_by(Public_Ledger.id.desc()).first().last_hash
+            last_block_hash = Public_Ledger.query.order_by(Public_Ledger.id.desc()).first().current_hash
 
-            data = Public_Ledger(pend_trans.pbk.sender,
+            data = Public_Ledger(pend_trans.pbk_sender,
                                 pend_trans.pbk_receiver,
-                                pend_trans.amount,pend.trans.date, 
+                                pend_trans.amount,
+                                pend_trans.date, 
                                 pend_trans.comments,
-                                hashed_block,
+                                str(hashed_block[1]),
                                 last_block_hash,
                                 nonce,
                                 dg
@@ -171,23 +174,24 @@ def showMiningPool():
             db.session.commit()
 
             user_sender = User_Crypto.query.filter_by(public_key=pend_trans.pbk_sender).first()
-            user_sender.net_balance -= pend_trans.amount
+            user_sender.net_balance = str(float(user_sender.net_balance) - float(pend_trans.amount))
             db.session.commit()
 
             user_receiver = User_Crypto.query.filter_by(public_key=pend_trans.pbk_receiver).first()
-            user_receiver.net_balance += pend_trans.amount
+            user_receiver.net_balance = str(float(user_receiver.net_balance) + float(pend_trans.amount))
             db.session.commit()
 
+            obj = Transaction_Crypto.query.filter_by(digital_signature=dg).first()
+            db.session.delete(obj)
+            db.session.commit()
+
+            msg = "Mined successfully!, Nonce: " + str(nonce)
+            print(msg)
 
 
-        else:
-            return render_template('views/mining_pool.html', query=query, msg="Added to the ledger already!")
-
-
-
-        
-  
-        return render_template('views/mining_pool.html', query=query, nonce=lst)
+        return render_template('views/mining_pool.html', msg=msg, query=query, lst=lst)
+    return render_template('views/mining_pool.html', msg=msg, query=query)
+    
     
     
 
@@ -244,7 +248,13 @@ def createTransaction():
             try:
                 digital_sig = create_Signature(message, private_key)
 
-                if(float(user.net_balance) < float(amount)):
+                pending_amt = Transaction_Crypto.query.filter_by(pbk_sender=public_key)
+                total_sum = 0
+                for s in pending_amt:
+                    total_sum += float(s.amount)
+
+
+                if(float(user.net_balance) < float(amount) + total_sum):
                     msg_warning = "Funds insufficient!"
 #            
                 elif verify_Signature(message, digital_sig, public_key):

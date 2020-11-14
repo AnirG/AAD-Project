@@ -8,8 +8,9 @@ CREATE TABLE IF NOT EXISTS "Public_Ledger" (
 	prev_hash STRING,
 	current_hash STRING,
 	nonce STRING,
-	verify_digital_signature BOOLEAN
+	digital_signature STRING
 );
+
 
 CREATE TABLE IF NOT EXISTS "Transaction_Crypto" (
 	id INTEGER PRIMARY KEY AUTOINCREMENT,

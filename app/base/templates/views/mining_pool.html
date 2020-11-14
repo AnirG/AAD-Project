@@ -27,6 +27,11 @@
                         <table class="table table-borderless">
 
                             {% for obj in query %}
+                                {% if obj.digital_signature in lst and msg %}
+                                <tr>
+                                    <button type="button" class="btn btn-outline-light">{{ msg }}</button>
+                                </tr>
+                                {% else %}
                             <tr>
                                 <td>
                             <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#modal1{{ loop.index }}">{{ obj.digital_signature }}</button>
@@ -56,40 +61,12 @@
                                 </td>
 
 
+
                                 <!--To show the nounce calculation running in bg-->
                                 <td>
                                 <form action="" method="post">
                                     <button type="submit" class="btn btn-outline-light" value="{{ obj.digital_signature }}" name="ss" data-toggle="modal" data-target="#modal2{{ loop.index }}">Mine</button>
-                            
-                            {% if obj.digital_signature in lst %}
-
-                              <!-- <div class="modal fade" id="modal2{{loop.index}}">
-                                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                      <div class="modal-content">
-                                          <div class="modal-header">
-                                              <h5 class="modal-title">Mining details</h5>
-                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                  <ion-icon name="close"></ion-icon>
-                                              </button>
-                                          </div>
-                                          <div class="modal-body">
-                                            <figure class="highlight"><pre><code class="language-html" data-lang="html">
-<span class=nt>Nonce: </span><span>{{ nonce }}</span>
-
-                                          </div>
-                                          <div class="modal-footer">
-                                              <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                              </form> -->
-                              <div class="alert alert-success" role="alert">
-                                Successfully mined! The nonce was {{ lst[1] }}
-                              </div>
-
-                              {% endif %}
-
+                            {% endif %}
 
                                 </td>
                             </tr>
