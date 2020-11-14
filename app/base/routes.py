@@ -197,8 +197,12 @@ def showMiningPool():
 
 
 
-# @blueprint.route('public_ledger', methods=['GET'])
-# def showTable():
+@blueprint.route('public_ledger', methods=['GET'])
+def showTable():
+    query = Public_Ledger.query.order_by(Public_Ledger.id.desc())
+    return render_template('views/public_ledger.html', query=query)
+
+    
 
 # # parse the public ledger db data to html
 
