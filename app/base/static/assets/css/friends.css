@@ -1,0 +1,18 @@
+.center-page{
+    background-color:green;
+     height: calc(100vh-50px);
+    width: 100vw;
+    justify-content: center;
+    align-items: center;
+}
+.fullpagex {
+        
+    background-color: #9e9e9e;
+}
+.user-list-item{
+    font-size: 1.5em;
+    font-weight: 600;
+}
+.btnx-icon{
+    font-size: 23px;
+}
