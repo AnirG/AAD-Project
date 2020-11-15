@@ -35,24 +35,21 @@
     </tr>
     </thead>
     <tbody>
-    {% for obj in query_sender %}
-   
-    <tr class="alert alert-danger" role="alert">
-      <td><center>{{ obj.id }}</center></td>
-      <td><center>{{ obj.amount }}</center></td>
-      <td><center>{{ obj.date }}</center></td>
-    </tr>
-    {% endfor %}
-    {% for obj in query_receiver %}
-    
-    <tr class="alert alert-success" role="alert">
-      <td><center>{{ obj.id }}</center></td>
-      <td><center>{{ obj.amount }}</center></td>
-      <td><center>{{ obj.date }}</center></td>
-    </tr>
-    </div>
-    {% endfor %}
+    {% for obj in query %}
 
+    {% if obj.pbk_sender == pbk %}
+    <tr class="alert alert-danger" role="alert">
+    {% else %}
+    <tr class="alert alert-success" role="alert">
+    {% endif %}
+
+    <td><center>{{ obj.id }}</center></td>
+      <td><center>{{ obj.amount }}</center></td>
+      <td><center>{{ obj.date }}</center></td>
+    </tr>
+
+
+    {% endfor %}
 
     </tbody>
     </table>

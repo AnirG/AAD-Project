@@ -27,6 +27,8 @@ from app.base.util import verify_pass
 
 from datetime import date
 
+from sqlalchemy import or_, desc
+
 @blueprint.route('/')
 def route_default():
     return redirect(url_for('base_blueprint.login'))
@@ -140,7 +142,16 @@ def register_for_crypto():
             return render_template('views/register_login_crypto.html', msg=msg, pvk=pvk) 
         return render_template('views/register_login_crypto.html', msg=msg) 
         
-        
+@blueprint.route('transaction_history',methods=['GET','POST'])
+def showTransactionHistory():
+
+    current_username = current_user._get_current_object().username
+    pbk = User_Crypto.query.filter_by(username=current_username).first().public_key
+    query = Public_Ledger.query.filter(or_(Public_Ledger.pbk_sender == pbk,  Public_Ledger.pbk_receiver == pbk)).order_by(Public_Ledger.id.desc())
+   
+    return render_template('views/transaction_history.html', query=query, pbk=pbk)
+
+
 
 @blueprint.route('mining_pool',methods=['GET','POST'])
 def showMiningPool():
