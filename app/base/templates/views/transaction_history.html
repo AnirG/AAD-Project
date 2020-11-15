@@ -1,0 +1,65 @@
+{% extends "layouts/base.html" %}
+
+{% block content %} 
+
+
+<div class="yoo-height-b30 yoo-height-lg-b30"></div>
+<div class="container">
+    <div class="yoo-uikits-heading">
+        <h2 class="yoo-uikits-title"><center>Transaction History</center></h2>
+    </div>
+</div>
+<div class="yoo-height-b30 yoo-height-lg-b30"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="yoo-card yoo-style1">
+
+            </div>
+            <div class="yoo-height-b30 yoo-height-lg-b30"></div>
+            <div class="yoo-card yoo-style1">
+                <div class="yoo-card-heading">
+                    <div class="yoo-card-heading-left">
+                        <h2 class="yoo-card-title">Blockchain</h2>
+                    </div>
+                </div>
+                <div class="yoo-card-body">
+                    <div class="yoo-padd-lr-20">
+                        <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+<table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col"><center>ID</center></th>
+      <th scope="col"><center>Amount</center></th>
+      <th scope="col"><center>Date</center></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for obj in query_sender %}
+   
+    <tr class="alert alert-danger" role="alert">
+      <td><center>{{ obj.id }}</center></td>
+      <td><center>{{ obj.amount }}</center></td>
+      <td><center>{{ obj.date }}</center></td>
+    </tr>
+    {% endfor %}
+    {% for obj in query_receiver %}
+    
+    <tr class="alert alert-success" role="alert">
+      <td><center>{{ obj.id }}</center></td>
+      <td><center>{{ obj.amount }}</center></td>
+      <td><center>{{ obj.date }}</center></td>
+    </tr>
+    </div>
+    {% endfor %}
+
+
+    </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}  
