@@ -108,6 +108,15 @@ def shutdown():
 
 # Crypto Implementations
 
+@blueprint.route('/index',methods=['GET'])
+def showDashboard():
+    current_username = current_user._get_current_object().username
+
+
+
+    return render_template('index.html')
+
+
 @blueprint.route('/register_login_crypto', methods=['GET','POST'])
 def register_for_crypto():
 
