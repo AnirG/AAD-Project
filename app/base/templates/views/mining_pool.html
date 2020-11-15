@@ -29,7 +29,9 @@
                             {% for obj in query %}
                                 {% if obj.digital_signature in lst and msg %}
                                 <tr>
-                                    <button type="button" class="btn btn-outline-light">{{ msg }}</button>
+                                    <div class="alert alert-success"> 
+                                        <strong>Successfully mined!</strong> {{ msg }} 
+                                    </div> 
                                 </tr>
                                 {% else %}
                             <tr>

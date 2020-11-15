@@ -1,21 +1,9 @@
-2. Make register page better for the crypto part.
-
-
-4. Remove PRIVATE KEY field and replace with digital signature directly with some mechanism.
-
-
-
-5. Add wallet balance in User_Cypto db.
-6. Update it after the transaction is initiated.
 
 
 <------ Miner functionalities-------->
 
 
-1. Implement is_verifified_digital_signature for the miner functionality and add it to the Public Ledger based on this authentication.
-2. Implement POW. 
 
-2. Make a table for this public ledger db.
 
 
 More ideas --->
@@ -24,6 +12,17 @@ More ideas --->
 2. 
 
 
+<------- changes ----------->
+
+1. Make register page better for the crypto part.
+3. 
+
+
+
+<------- finishing touches --------->
+
+1. Store hash of private keys instead of actual private keys.
+2. 
 
 
 <------Remember------->

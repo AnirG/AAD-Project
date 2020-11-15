@@ -106,31 +106,41 @@ def shutdown():
 
 # Crypto Implementations
 
-@blueprint.route('/register_for_crypto', methods=['GET','POST'])
+@blueprint.route('/register_login_crypto', methods=['GET','POST'])
 def register_for_crypto():
 
     if not current_user.is_authenticated:
         return redirect(url_for('base_blueprint.login'))
 
-    if request.method == "POST":
+    current_username = current_user._get_current_object().username
 
-        current_username = current_user._get_current_object().username
+    if User_Crypto.query.filter_by(username=current_username).first():
 
-        if User_Crypto.query.filter_by(username=current_username).first():
-           return render_template('views/pay.html', msg='Already Registered!') 
+        if request.method == "POST":
+            user = User_Crypto.query.filter_by(username=current_username).first().private_key
+            print(user, request.form['private_key'])
+            if request.form['private_key'] == user:
+                return redirect('/public_ledger')
+            else:
+                return render_template('views/register_login_crypto.html', msg_warning='Wrong private key!') 
 
+        return render_template('views/register_login_crypto.html', msg='') 
 
-        pvk, pbk = generate_KeyPair()
-        id = User.query.filter_by(username=current_username).first().id
-       # print(type(pvk), type(pbk), id)
-        user = User_Crypto(current_username, pvk, pbk, id)
-        db.session.add(user)
-        db.session.commit()
-
-
-        return render_template('views/pay.html', msg='Registered!')
     else:
-        return render_template('views/pay.html')
+        
+        msg="need to register"
+
+        if request.method == "POST":
+
+            pvk, pbk = generate_KeyPair()
+            id = User.query.filter_by(username=current_username).first().id
+            user = User_Crypto(current_username, pvk, pbk, id)
+            db.session.add(user)
+            db.session.commit()
+            return render_template('views/register_login_crypto.html', msg=msg, pvk=pvk) 
+        return render_template('views/register_login_crypto.html', msg=msg) 
+        
+        
 
 @blueprint.route('mining_pool',methods=['GET','POST'])
 def showMiningPool():
@@ -185,7 +195,7 @@ def showMiningPool():
             db.session.delete(obj)
             db.session.commit()
 
-            msg = "Mined successfully!, Nonce: " + str(nonce)
+            msg = " Nonce: " + str(nonce)
             print(msg)
 
 

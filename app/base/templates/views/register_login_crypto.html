@@ -1,0 +1,77 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block content %}  
+
+{% if msg %}
+<form method="post">
+    <button type="submit" name = "register" ripple="ripple" ripple-color="#fff" class="btn btn-primary btn-lg">Create a Cryto Account!</button>
+    {% if pvk %}
+    <div class="alert alert-success"> 
+      <strong>Your private key is: {{ pvk }}</strong>
+    </div>
+    {% endif %}
+</form>
+    {% else %}
+    
+
+    {% block title %} Login {% endblock %}
+    
+    <!-- Specific CSS goes HERE -->
+    {% block stylesheets %}{% endblock stylesheets %}
+    <form method="post">
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="yoo-vertical-middle">
+              <div class="yoo-vertical-middle-in">
+                <div class="yoo-signup-img yoo-style1">
+                  <img src="/static/assets/img/signup/01.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div><!-- .col -->
+          <div class="col-lg-5">
+            <div class="yoo-vertical-middle">
+              <div class="yoo-vertical-middle-in">
+                
+                <form method="post" action="" class="yoo-form yoo-style1">
+    
+                  <h2 class="yoo-form-title">
+                      Login
+                  </h2>
+                  <div class="yoo-height-b15 yoo-height-lg-b15"></div>
+                  <div class="yoo-form-separator"> &nbsp; </div>
+                  <div class="yoo-height-b15 yoo-height-lg-b15"></div>
+    
+                    <div class="col-lg-12">
+                      <div class="form-group level-up form-group-md">
+                        <label for="password">Private Key</label>
+                        <input class="form-control" placeholder="" type="password" name="private_key" value="">
+                      </div>
+                      </div>
+                      <button type="submit" name="login"  
+                              class="yoo-form-btn yoo-style1 yoo-color1"><span>Login</span>
+                      </button>
+                      <br>
+                      {% if msg_warning %}
+                      <div class="alert alert-danger"> 
+                        <strong>{{ msg_warning }}</strong>  
+                      </div>    
+                      {% endif %}
+
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    
+
+      {% endif %} 
+    <!-- Specific Page JS goes HERE  -->
+    {% block javascripts %}{% endblock javascripts %}
+  
+
+
+{% endblock content %}
