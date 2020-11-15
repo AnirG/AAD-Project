@@ -232,7 +232,7 @@ def showTable():
 
 
 
-@blueprint.route('make_transaction_aaa', methods=['GET','POST'])
+@blueprint.route('make_transaction', methods=['GET','POST'])
 def createTransaction():
 
     if not current_user.is_authenticated:
