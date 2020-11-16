@@ -27,6 +27,9 @@ from app.base.util import verify_pass
 
 from datetime import date
 
+from mysql.connector import MySQLConnection, Error
+from python_mysql_dbconfig import read_db_config
+
 
 @blueprint.route('friends_list',methods=['GET','POST'])
 def generate_friends_list():
@@ -46,36 +49,73 @@ def add_friend():
     if not current_user.is_authenticated:
         return redirect(url_for('base_blueprint.login'))
 
-    form = friends_form(request.form)
+    form = pending_friends_form(request.form)
 
-    temp1 = request.form['user']
-    temp2 = request.form['friend']
-    temp3 = request.form['amount']
+    friend_id = request.form['user']
+    user_id = request.form['friends']
 
-    user_id = temp1
-    friend_id = temp2
-    amount = temp3
+    friend_check = User.query.filter_by(username = friend_id).first()
+    if not friend_check:
+        return render_template( '', msg = 'Friend does not exist to be added', form = pending_friends_form)
 
-    friend_check = User.query.filter_by(username = user_id).first()
-    if not user:
-        return render_template( '', msg = 'Friend does not exist to be added', form = friends_form)
-
-    friend = friends_bs(**request.form)
-    db.session.add(friend)
-    db.session.commit()
-
-    user_id = temp2
-    friend_id = temp1
-    amount = temp3    
-
-    friend = friends_bs(**request.form)
+    friend = friends_requests(**request.form)
     db.session.add(friend)
     db.session.commit()
 
     return render_template( '', msg = 'Friend added succesfully', form = friends_form)
 
-@blueprint.route('add transaction',methods = ['GET','POST'])
+@blueprint.route('accept friend',methods = ['GET','POST'])
+def accept_friend():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
+    form = friends_form(request.form)
+
+    user_id = request.form['user']
+    friend_id= request.form['friends']
+    amount = 0
+
+    p_friend = friend_bs(**request.form)
+    db.session.add(p_friend)
+    db.sessiomn.commit()
+
+    return_render_template( '', msg = 'Friend request accepted', form = pending_friends_form)\
+
+@blueprint.route('add_transaction',methods=['GET','POST'])
 def add_transaction():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
+    form = pending_transactions_form(request.form)
+
+    current_username = current_user._get_current_object().username
+    temp1 = current_username
+    temp2 = request.form['friend']
+    temp3 = request.form['amount']
+    temp4 = request.form['status']
+
+    from_id = temp1
+    to_id = temp2
+    amount = temp3
+    status = temp4
+
+    pt = pending_transactions(**request.form)
+    db.session.add(pt)
+    db.session.commit()
+
+    from_id = temp2
+    to_id = temp1
+    amount = (-1)*temp3
+    status = temp4
+
+    pt = pending_transactions(**request.form)
+    db.session.add(pt)
+    db.session.commit()
+
+    return render_template( '', msg = 'Transaction request added succesfully')
+
+@blueprint.route('Confirm_transaction',methods = ['GET','POST'])
+def confirm_transaction():
     if not current_user.is_authenticated:
         return redirect(url_for('base_blueprint.login'))
 
@@ -84,42 +124,35 @@ def add_transaction():
     temp1 = request.form['from_id']
     temp2 = request.form['to_id']
     temp3 = request.form['amount']
-    temp4 = request.form['status']
+    status = request.form['status']
+    
     from_id = temp1
     to_id = temp2
     amount = temp3
-    status = temp4
+   
 
     transaction = confirmed_transactions(**request.form)
     db.session.add(transaction)
     db.session.commit()
 
-    from_id = temp2
-    to_id = temp1
-    amount = temp3
-    status = temp4
+    db_config = read_db_config()
+    query = "Delete FROM pending_transactions WHERE from_id = %s and to_id = %d and amount = %a"
 
-    transaction = User(**request.form)
-    db.session.add(transaction)
-    db.session.commit()
+    try:
+	    del_transaction = pending_transactions(**db_config)
+	    cursor = del_transaction.cursor()
+	    cursor.execute(query,(temp1),(temp2),(temp3))
+	    cursor.execute(query,(temp2),(temp1),(-1*temp3))
+	    del_transaction.commit()
+    
+    except Error as error:
+    	print(error)
 
-    return render_template( '', msg = 'Friend added succesfully', form = transactions_form)
+    finally:
+    	cursor.close()
+    	del_transaction.close()
 
-@blueprint.route('accept friend',methods = ['GET','POST'])
-def accept_friend():
-    if not current_user.is_authenticated:
-        return redirect(url_for('base_blueprint.login'))
-
-    form = pending_friends_form(request.form)
-
-    from_id = request.form['user']
-    to_id = request.form['friends']
-
-    p_friends = friend_requests(**request.form)
-    db.session.add(p_friends)
-    db.sessiomn.commit()
-
-    return_render_template( '', msg = 'Friend request accepted', form = pending_friends_form)\
+    return render_template( '', msg = 'Transaction Confirmed', form = transactions_form)
 
 @blueprint.route('pending transactions',methods = ['GET','POST'])
 def pending_transactions():
@@ -133,6 +166,32 @@ def pending_transactions():
     pending_transactions_form = friend_bs.filter_by(current_username=user_id)
 
     return render_template('', to_id = pending_transactions_form.to_id, amount = pending_transactions_form.amount )
+
+@blueprint.route('Friend_request_list',methods = ['GET','POST'])
+def Friend_request_list():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+    
+    form = pending_friends_form(request.form)
+    
+    current_username = current_user._get_current_object().username
+    
+    pending_friends_form = friend_requests.filter_by(current_username=user_id)
+    
+    return render_template('', friend_request = pending_friends_form.friends )
+
+@blueprint.route('Transactions_list',methods = ['GET','POST'])
+def Transactions_list():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+    
+    form = transactions_form(request.form)
+    
+    current_username = current_user._get_current_object().username
+    
+    transactions_form = confirmed_transactions.filter_by(current_username=from_id)
+    
+    return render_template('', friend_name = transactions_form.to_id, amount = transactions_form.amount )
 
 
 ## Errors
