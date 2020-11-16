@@ -108,16 +108,18 @@ def shutdown():
 
 # Crypto Implementations
 
-@blueprint.route('/index',methods=['GET'])
+@blueprint.route('/index_crypto',methods=['GET'])
 def showDashboard():
+
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
     current_username = current_user._get_current_object().username
+    user = User_Crypto.query.filter_by(username=current_username).first()
+    return render_template('index_crypto.html', net_balance = user.net_balance)
 
 
-
-    return render_template('index.html')
-
-
-@blueprint.route('/register_login_crypto', methods=['GET','POST'])
+@blueprint.route('/register_crypto', methods=['GET','POST'])
 def register_for_crypto():
 
     if not current_user.is_authenticated:
@@ -126,7 +128,7 @@ def register_for_crypto():
     current_username = current_user._get_current_object().username
 
     if User_Crypto.query.filter_by(username=current_username).first():
-
+        print("haha")
         if request.method == "POST":
             user = User_Crypto.query.filter_by(username=current_username).first().private_key
             print(user, request.form['private_key'])
@@ -154,6 +156,9 @@ def register_for_crypto():
 @blueprint.route('transaction_history',methods=['GET','POST'])
 def showTransactionHistory():
 
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
     current_username = current_user._get_current_object().username
     pbk = User_Crypto.query.filter_by(username=current_username).first().public_key
     query = Public_Ledger.query.filter(or_(Public_Ledger.pbk_sender == pbk,  Public_Ledger.pbk_receiver == pbk)).order_by(Public_Ledger.id.desc())
@@ -164,7 +169,8 @@ def showTransactionHistory():
 
 @blueprint.route('mining_pool',methods=['GET','POST'])
 def showMiningPool():
-    print("haha")
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
     query = Transaction_Crypto.query.all()
     msg=""
 
@@ -229,6 +235,8 @@ def showMiningPool():
 
 @blueprint.route('public_ledger', methods=['GET'])
 def showTable():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
     query = Public_Ledger.query.order_by(Public_Ledger.id.desc())
     return render_template('views/public_ledger.html', query=query)
 

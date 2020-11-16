@@ -1,4 +1,4 @@
-{% extends "layouts/base.html" %}
+{% extends "layouts/base_crypto.html" %}
 
 {% block title %} Dashboard {% endblock %} 
 
@@ -21,7 +21,7 @@
     <div class="yoo-height-b30 yoo-height-lg-b30"></div>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-xl-12 col-sm-12">
+        <div class="col-xl-3 col-sm-6">
           <div class="yoo-iconbox yoo-style1 yoo-color1 yoo-green-bg yoo-blue-shadow">
             <div class="yoo-iconbox-in">
               <div class="yoo-iconbox-number text-large">Net Balance</div>
@@ -31,6 +31,36 @@
           </div>
           <div class="yoo-height-b30 yoo-height-lg-b30"></div>
         </div><!-- .col -->
+        <div class="col-xl-3 col-sm-6">
+            <div class="yoo-iconbox yoo-style1 yoo-color1 yoo-green-bg yoo-blue-shadow">
+              <div class="yoo-iconbox-in">
+                <div class="yoo-iconbox-title text-large">Net Balance</div>
+                <div class="yoo-iconbox-number text-large">{{net_balance}} CC</div>
+                <div class="yoo-iconbox-icon"><ion-icon name="albums"></ion-icon></div>
+              </div>
+            </div>
+            <div class="yoo-height-b30 yoo-height-lg-b30"></div>
+          </div><!-- .col -->
+          <div class="col-xl-3 col-sm-6">
+            <div class="yoo-iconbox yoo-style1 yoo-color1 yoo-green-bg yoo-blue-shadow">
+              <div class="yoo-iconbox-in">
+                <div class="yoo-iconbox-title text-large">Net Balance</div>
+                <div class="yoo-iconbox-number text-large">{{net_balance}} CC</div>
+                <div class="yoo-iconbox-icon"><ion-icon name="albums"></ion-icon></div>
+              </div>
+            </div>
+            <div class="yoo-height-b30 yoo-height-lg-b30"></div>
+          </div><!-- .col -->
+          <div class="col-xl-3 col-sm-6">
+            <div class="yoo-iconbox yoo-style1 yoo-color1 yoo-green-bg yoo-blue-shadow">
+              <div class="yoo-iconbox-in">
+                <div class="yoo-iconbox-number text-large">Net Balance</div>
+                <div class="yoo-iconbox-number text-large"><center>{{net_balance}} CC</center></div>
+                <div class="yoo-iconbox-icon"><ion-icon name="albums"></ion-icon></div>
+              </div>
+            </div>
+            <div class="yoo-height-b30 yoo-height-lg-b30"></div>
+          </div><!-- .col -->
       </div>
       <div class="row">
         <div class="col-lg-8">
