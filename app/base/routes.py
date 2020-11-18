@@ -22,6 +22,8 @@ from app import db, login_manager
 from app.base import blueprint
 from app.base.forms import LoginForm, CreateAccountForm, MakeTransactionCrypto
 from app.base.models import User, User_Crypto, Public_Ledger, Transaction_Crypto
+from app.base.forms_bs import friends_form, pending_friends_form, transactions_form, pending_transactions_form
+from app.base.models_bs import friends_bs, friend_requests, pending_transactions, confirmed_transactions
 
 from app.base.util import verify_pass
 
@@ -316,6 +318,134 @@ def createTransaction():
     
     return render_template('views/make_transaction.html', form=MakeTransactionCrypto, public_key = user.public_key, msg_success=msg_success, msg_warning=msg_warning)
 
+
+@blueprint.route('friends_list',methods=['GET','POST'])
+def generate_friends_list():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+    
+    current_username = current_user._get_current_object().username
+    
+    friends_form = friends_bs.query.filter_by(user_id=current_username)
+    
+    pending_friends_form = friend_requests.query.filter_by(user_id=current_username)
+    
+    if 'accept' in request.form:
+        print ("hi")
+        name_id = request.form['accept']
+        print (name)
+        
+        form = friends_form(request.form)
+
+        user_id = current_username
+        friend_id= name_id
+        amount = 0
+
+        p_friend = friend_bs(**request.form)
+        db.session.add(p_friend)
+        db.sessiomn.commit()
+
+        db_config = read_db_config()
+        query = "DELETE FROM friend_requests WHERE user_id = %s and friend_id = %d"
+
+        try:
+	        del_request = friend_requests(**db_config)
+	        cursor = del_request.cursor()
+	        cursor.execute(query,(user_id),(friend_id))
+	        del_request.commit()
+
+        except Error as error:
+        	print(error)
+
+        finally:
+        	cursor.close()
+        	del_request.close()
+        
+    if 'decline' in request.form:
+        print ("hello")
+        name = request.form['decline']
+        print (name)
+        
+    if 'search_friend' in request.form:
+        print("boo")
+    
+    
+    return render_template('views/friends.html', current_friend = friends_form, pending_friend = pending_friends_form)
+
+
+
+@blueprint.route('pending_transactions',methods = ['GET','POST'])
+def pending_transactions():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
+    current_username = current_user._get_current_object().username
+    
+    pending_transactions_form = pending_transactions.query.filter_by(to_id=current_username)
+    
+    transactions_form = confirmed_transactions.query.filter_by(to_id=current_username)
+
+    return render_template('views/transactions.html', to = pending_transactions_form, to_confirmed = transactions_form)
+
+
+
+'''
+@blueprint.route('accept friend',methods = ['GET','POST'])
+def accept_friend():
+    if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
+    form = friends_form(request.form)
+
+    user_id = request.form['user']
+    friend_id= request.form['friends']
+    amount = 0
+
+    p_friend = friend_bs(**request.form)
+    db.session.add(p_friend)
+    db.sessiomn.commit()
+
+    db_config = read_db_config()
+    query = "DELETE FROM friend_requests WHERE user_id = %s and friend_id = %d"
+
+    try:
+	    del_request = friend_requests(**db_config)
+	    cursor = del_request.cursor()
+	    cursor.execute(query,(user_id),(friend_id))
+	    del_request.commit()
+    
+    except Error as error:
+    	print(error)
+
+    finally:
+    	cursor.close()
+    	del_request.close()
+
+    return_render_template( '', msg = 'Friend request accepted', form = pending_friends_form)\
+
+@blueprint.route('decline friend',methods = ['GET','POST'])
+def decline_friend:
+	if not current_user.is_authenticated:
+		return redirect(url_for('base_blueprint.login'))
+
+	db_config = read_db_config()
+	query = "DELETE FROM friend_requests WHERE user_id = %s and friend_id = %d"
+
+	try:
+		del_request = friend_requests(**db_config)
+		cursor = del_request.cursor()
+	    cursor.execute(query,(user_id),(friend_id))
+	    del_request.commit()
+    
+    except Error as error:
+    	print(error)
+
+    finally:
+    	cursor.close()
+    	del_request.close()
+
+    return_render_template( '', msg = 'Friend request declined', form = pending_friends_form)
+'''
 
 ## Errors
 

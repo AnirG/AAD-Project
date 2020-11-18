@@ -62,7 +62,7 @@ def add_friend():
     db.session.add(friend)
     db.session.commit()
 
-    return render_template( '', msg = 'Friend added succesfully', form = friends_form)
+    return render_template( '', msg = 'Friend request sent', form = friends_form)
 
 @blueprint.route('accept friend',methods = ['GET','POST'])
 def accept_friend():
@@ -79,7 +79,47 @@ def accept_friend():
     db.session.add(p_friend)
     db.sessiomn.commit()
 
+    db_config = read_db_config()
+    query = "DELETE FROM friend_requests WHERE user_id = %s and friend_id = %d"
+
+    try:
+	    del_request = friend_requests(**db_config)
+	    cursor = del_request.cursor()
+	    cursor.execute(query,(user_id),(friend_id))
+	    del_request.commit()
+    
+    except Error as error:
+    	print(error)
+
+    finally:
+    	cursor.close()
+    	del_request.close()
+
     return_render_template( '', msg = 'Friend request accepted', form = pending_friends_form)\
+
+@blueprint.route('decline friend',methods = ['GET','POST'])
+def decline_friend:
+	if not current_user.is_authenticated:
+		return redirect(url_for('base_blueprint.login'))
+
+	db_config = read_db_config()
+	query = "DELETE FROM friend_requests WHERE user_id = %s and friend_id = %d"
+
+	try:
+		del_request = friend_requests(**db_config)
+		cursor = del_request.cursor()
+	    cursor.execute(query,(user_id),(friend_id))
+	    del_request.commit()
+    
+    except Error as error:
+    	print(error)
+
+    finally:
+    	cursor.close()
+    	del_request.close()
+
+    return_render_template( '', msg = 'Friend request declined', form = pending_friends_form)\
+
 
 @blueprint.route('add_transaction',methods=['GET','POST'])
 def add_transaction():
@@ -136,7 +176,7 @@ def confirm_transaction():
     db.session.commit()
 
     db_config = read_db_config()
-    query = "Delete FROM pending_transactions WHERE from_id = %s and to_id = %d and amount = %a"
+    query = "DELETE FROM pending_transactions WHERE from_id = %s and to_id = %d and amount = %a"
 
     try:
 	    del_transaction = pending_transactions(**db_config)
@@ -153,6 +193,27 @@ def confirm_transaction():
     	del_transaction.close()
 
     return render_template( '', msg = 'Transaction Confirmed', form = transactions_form)
+
+@blueprint.route('delete transaction',methods = ['GET','POST'])
+def delete_transaction:
+	if not current_user.is_authenticated:
+        return redirect(url_for('base_blueprint.login'))
+
+    db_config = read_db_config()
+	query = "DELETE FROM pending_transactions WHERE from_id = %s and to_id = %d and amount = %a"
+
+	try:
+		del_request = pending_transactions(**db_config)
+		cursor = del_request.cursor()
+	    cursor.execute(query,(from_id),(to_id),(amount))
+	    del_request.commit()
+    
+    except Error as error:
+    	print(error)
+
+    finally:
+    	cursor.close()
+    	del_request.close()
 
 @blueprint.route('pending transactions',methods = ['GET','POST'])
 def pending_transactions():

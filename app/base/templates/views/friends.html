@@ -1,0 +1,122 @@
+{% extends "layouts/base.html" %}
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="/static/assets/css/jqvmap.min.css" />
+<link rel="stylesheet" type="text/css" href="/static/assets/css/friends.css" />
+{% endblock stylesheets %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6 my-5">
+        <div class="yoo-card yoo-style1">
+            <div class="yoo-card-heading">
+                <div class="yoo-card-heading-left">
+                    <h2 class="yoo-card-title"><span class="yoo-card-title-icon yoo-green-bg">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>Friend List</h2>
+                </div>
+            </div>
+            <div class="yoo-card-body">
+                <div class="yoo-padd-lr-20">
+                    <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+                    {% for friend in current_friend %}
+                    <div class="yoo-medias yoo-style1 yoo-type1 d-flex flex-row align-items-center">
+                        <div class="yoo-media-meta">
+                            <div class="row d-flex">
+                                <div class="col-6 text-left ">
+                                    <div class="user-list-item">
+                                        {{ friend.friend_id }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btnx-icon badge badge-success align-self-center ">
+                            {{ friend.amount }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3 "></div>
+    <div class="col-lg-6 my-5">
+        <div class="yoo-card yoo-style1">
+            <div class="yoo-card-heading">
+                <div class="yoo-card-heading-left">
+                    <h2 class="yoo-card-title"><span class="yoo-card-title-icon yoo-purple-bg">
+                            <ion-icon name="flask" role="img" class="md hydrated" aria-label="flask"></ion-icon>
+                        </span>Pending list</h2>
+                </div>
+            </div>
+            <div class="yoo-card-body">
+                <div class="yoo-padd-lr-20">
+                    <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+                    {% for friendo in pending_friend %}
+                    <div class="yoo-medias yoo-style1 yoo-type1">                        
+                        <div class="yoo-media-meta">
+                            <div class="row d-flex">
+                                <div class="col text-left ">
+                                    <div class="user-list-item">
+                                        {{ friendo.friend_id }}
+                                    </div>
+                                </div>
+                                <form method="POST">
+                                <div class="col">
+                                    <div class="d-flex flex-row justify-content-end">
+                                        
+                                        <button type="submit" name="accept" ripple="ripple" ripple-color="#fff"
+                                            class="btn btn-success mx-1 d-flex flex-column align-items-center" value="{{ friendo.friend_id }}">
+                                            <ion-icon class="btnx-icon" name="checkmark-outline"></ion-icon>
+                                        </button>
+                                        <button type="submit" name="decline" ripple="ripple" ripple-color="#fff"
+                                            class="btn btn-danger mx-1 d-flex flex-column align-items-center" value="{{ friendo.friend_id }}">
+                                            <ion-icon name="close-outline" class="btnx-icon"></ion-icon>
+                                        </button>
+                                        
+                                    </div>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}                    
+                </div>
+                <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+            </div>
+        </div>
+        <div class="yoo-height-b30 yoo-height-lg-b30"></div>
+    </div>
+    <div class="col-lg-3"></div>
+</div>
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6 my-5">
+        <div class="yoo-card yoo-style1">
+            <div class="yoo-card-heading">
+                <div class="yoo-card-heading-left">
+                    <h2 class="yoo-card-title"><span class="yoo-card-title-icon yoo-green-bg">
+                        <ion-icon name="add-outline"></ion-icon>
+                        </span>Add friend</h2>
+                </div>
+            </div>
+            <div class="yoo-card-body">
+                <div class="yoo-padd-lr-20">
+                    <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+                    <div class="yoo-sidebar-search">
+                        <form action="#" class="yoo-search yoo-style1 yoo-search-md">
+                          <input type="text" placeholder="Search..." class="yoo-search-input">
+                          <button class="yoo-search-submit" name ="search_friend" type="submit" ><ion-icon name="search"></ion-icon></button>                         
+                        </form>
+                      </div>
+                    <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>
+</div>
+{% endblock content %}

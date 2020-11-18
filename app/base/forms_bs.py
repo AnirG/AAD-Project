@@ -24,10 +24,12 @@ class transactions_form(FlaskForm):
     from_id = TextField('from_id', id='from_id'   , validators=[DataRequired()])
     to_id = TextField('to_id', id='to_id'   , validators=[DataRequired()])
     amount = TextField('amount', id='amount'   , validators=[DataRequired()])
-    status = TextField('status', id='status'   , validators=[DataRequired()])
-
+    comment = TextField('comment', id='comment'   , validators=[DataRequired()])
+    date_p = TextField('date_p', id='date_p'   , validators=[DataRequired()])
     
 class pending_transactions_form(FlaskForm):
     from_id = TextField('pfrom_id', id='pfrom_id'   , validators=[DataRequired()])
     to_id = TextField('pto_id', id='pto_id'   , validators=[DataRequired()])
-    amount = TextField('pamount', id='pamount'   , validators=[DataRequired()]
+    amount = TextField('pamount', id='pamount'   , validators=[DataRequired()])
+    comment = TextField('pcomment', id='pcomment'   , validators=[DataRequired()])
+    date_p = TextField('pdate_p', id='pdate_p'   , validators=[DataRequired()])
