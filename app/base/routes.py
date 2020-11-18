@@ -374,17 +374,17 @@ def generate_friends_list():
 
 
 
-@blueprint.route('pending_transactions',methods = ['GET','POST'])
-def pending_transactions():
+@blueprint.route('transactions_page',methods = ['GET','POST'])
+def transactions_page():
     if not current_user.is_authenticated:
         return redirect(url_for('base_blueprint.login'))
 
     current_username = current_user._get_current_object().username
     
-    pending_transactions_form = pending_transactions.query.filter_by(to_id=current_username)
-    
     transactions_form = confirmed_transactions.query.filter_by(to_id=current_username)
-
+    
+    pending_transactions_form = pending_transactions.query.filter_by(to_id=current_username).all()
+    
     return render_template('views/transactions.html', to = pending_transactions_form, to_confirmed = transactions_form)
 
 
