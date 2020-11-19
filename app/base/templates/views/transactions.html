@@ -67,18 +67,20 @@
                                         {{ lis.amount }}
                                     </div>
                                 </div>
+                                <form method="POST">
                                 <div class="col">
                                     <div class="d-flex flex-row justify-content-end">
-                                        <button type="button" ripple="ripple" ripple-color="#fff"
-                                            class="btn btn-success mx-1 d-flex flex-column align-items-center">
+                                        <button type="submit" name ="accept" ripple="ripple" ripple-color="#fff" 
+                                            class="btn btn-success mx-1 d-flex flex-column align-items-center" value ="{{ lis }}">
                                             <ion-icon class="btnx-icon" name="checkmark-outline"></ion-icon>
                                         </button>
-                                        <button type="button" ripple="ripple" ripple-color="#fff"
-                                            class="btn btn-danger mx-1 d-flex flex-column align-items-center">
+                                        <button type="submit" name = "decline" ripple="ripple" ripple-color="#fff" 
+                                            class="btn btn-danger mx-1 d-flex flex-column align-items-center" value ="{{ lis }}">
                                             <ion-icon name="close-outline" class="btnx-icon"></ion-icon>
                                         </button>
                                     </div>
                                 </div>
+                            </form>
                             </div>
                         </div>
                     </div> 

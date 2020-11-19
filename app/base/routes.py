@@ -402,6 +402,41 @@ def transactions_page():
     
     pending_transactions_form = pending_transactions.query.filter_by(to_id=current_username).all()
     
+    if 'accept' in request.form:
+        print ("hiiiiii")
+        trans_d = request.form['accept']
+        print(trans_d)
+        
+        data = confirmed_transactions(
+            trans_d.from_id,
+            trans_d.to_id,
+            trans_d.amount,
+            trans_d.date_p,
+            trans_d.comment
+        )
+
+        db.session.add(data)
+        db.session.commit()
+
+        data2 = confirmed_transactions(
+            trans_d.from_id,
+            trans_d.to_id,
+            trans_d.amount,
+            trans_d.date_p,
+            trans_d.comment
+        )
+        db.session.delete(data2)
+        db.session.commit()
+
+    if 'decline' in request.form:
+        print ("hello")
+        name_id = request.form['decline']
+        user_id = current_username
+        friend_id= name_id
+        obj = friend_requests.query.filter( and_(friend_requests.user_id.like(user_id), friend_requests.friend_id.like(friend_id))).first()
+        db.session.delete(obj)
+        db.session.commit()
+    
     return render_template('views/transactions.html', to = pending_transactions_form, to_confirmed = transactions_form)
 
 
