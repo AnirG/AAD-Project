@@ -45,15 +45,12 @@ class friend_requests(db.Model):
 class confirmed_transactions(db.Model):
     
     __tablename__ = 'confirmed_transactions'
-    
+    id = Column(Integer, primary_key=True)
     from_id = Column(String)
     to_id = Column(String)
     amount = Column(String)
     date_p = Column(String)
     comment = Column(String)
-    __table_args__ = (
-        PrimaryKeyConstraint('from_id', 'to_id','amount','date_p','comment'),
-    )
     def __init__(self, a, b, c, d, e):
         self.from_id = a
         self.to_id = b
@@ -65,15 +62,13 @@ class confirmed_transactions(db.Model):
 class pending_transactions(db.Model):
     
     __tablename__ = 'pending_transactions'
-    
+    id = Column(Integer, primary_key=True)
     from_id = Column(String)
     to_id = Column(String)
     amount = Column(String)
     date_p = Column(String)
     comment = Column(String)
-    __table_args__ = (
-        PrimaryKeyConstraint('from_id', 'to_id','amount','date_p','comment'),
-    )
+
     def __init__(self, a, b, c, d, e):
         self.from_id = a
         self.to_id = b

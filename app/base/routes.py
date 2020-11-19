@@ -404,8 +404,10 @@ def transactions_page():
     
     if 'accept' in request.form:
         print ("hiiiiii")
-        trans_d = request.form['accept']
-        print(trans_d)
+        id = request.form['accept']
+        trans_d = pending_transactions.query.filter_by(id=id).first()
+        
+        print(trans_d.amount, trans_d.from_id, trans_d.to_id)
         
         data = confirmed_transactions(
             trans_d.from_id,
@@ -414,18 +416,23 @@ def transactions_page():
             trans_d.date_p,
             trans_d.comment
         )
-
+        
+        friend_obj = friends_bs.query.filter(and_(friends_bs.user_id == trans_d.from_id, friends_bs.friend_id == trans_d.to_id)).first()
+        friend_obj.amount = str(float(friend_obj.amount) - float(trans_d.amount))
+        db.session.commit()
+    
         db.session.add(data)
         db.session.commit()
 
-        data2 = confirmed_transactions(
-            trans_d.from_id,
-            trans_d.to_id,
-            trans_d.amount,
-            trans_d.date_p,
-            trans_d.comment
-        )
-        db.session.delete(data2)
+        # data2 = pending_transactions(
+        #     trans_d.from_id,
+        #     trans_d.to_id,
+        #     trans_d.amount,
+        #     trans_d.date_p,
+        #     trans_d.comment
+        # )
+   
+        db.session.delete(trans_d)
         db.session.commit()
 
     if 'decline' in request.form:

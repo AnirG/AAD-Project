@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS "friend_requests" (
 	friend_id VARCHAR
 );
 CREATE TABLE IF NOT EXISTS "pending_transactions" (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	from_id VARCHAR,
 	to_id VARCHAR,
 	amount VARCHAR,
@@ -15,6 +16,7 @@ CREATE TABLE IF NOT EXISTS "pending_transactions" (
 	date_p VARCHAR
 );
 CREATE TABLE IF NOT EXISTS "confirmed_transactions" (
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	from_id VARCHAR,
 	to_id VARCHAR,
 	amount VARCHAR,
