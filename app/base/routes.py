@@ -29,7 +29,7 @@ from app.base.util import verify_pass
 
 from datetime import date
 
-from sqlalchemy import or_, desc
+from sqlalchemy import or_, desc, and_
 
 @blueprint.route('/')
 def route_default():
@@ -331,40 +331,57 @@ def generate_friends_list():
     pending_friends_form = friend_requests.query.filter_by(user_id=current_username)
     
     if 'accept' in request.form:
-        print ("hi")
+        print ("hiiiiii")
         name_id = request.form['accept']
-        print (name)
+        print (name_id)
         
-        form = friends_form(request.form)
+        #form = friends_form(request.form)
 
         user_id = current_username
         friend_id= name_id
-        amount = 0
+        amount = "0"
+        print(user_id)
+        print("he is the user")
+        
+        data = friends_bs(
+            user_id,
+            friend_id,
+            amount
+        )
 
-        p_friend = friend_bs(**request.form)
-        db.session.add(p_friend)
-        db.sessiomn.commit()
+        #p_friend = friends_bs(**request.form)
+        db.session.add(data)
+        db.session.commit()
 
-        db_config = read_db_config()
-        query = "DELETE FROM friend_requests WHERE user_id = %s and friend_id = %d"
+        obj = friend_requests.query.filter( and_(friend_requests.user_id.like(user_id), friend_requests.friend_id.like(friend_id))).first()
+        db.session.delete(obj)
+        db.session.commit()
 
-        try:
-	        del_request = friend_requests(**db_config)
-	        cursor = del_request.cursor()
-	        cursor.execute(query,(user_id),(friend_id))
-	        del_request.commit()
+        #db_config = read_db_config()
+        #query = "DELETE FROM friend_requests WHERE user_id = user_id and friend_id = friend_id"
 
-        except Error as error:
-        	print(error)
+        # try:
+	    #     del_request = friend_requests(**db_config)
+	    #     cursor = del_request.cursor()
+	    #     cursor.execute(query,(user_id),(friend_id))
+	    #     del_request.commit()
 
-        finally:
-        	cursor.close()
-        	del_request.close()
+        # except Error as error:
+        # 	print(error)
+
+        # finally:
+        # 	cursor.close()
+        # 	del_request.close()
         
     if 'decline' in request.form:
         print ("hello")
-        name = request.form['decline']
-        print (name)
+        name_id = request.form['decline']
+        print (name_id)
+        user_id = current_username
+        friend_id= name_id
+        obj = friend_requests.query.filter( and_(friend_requests.user_id.like(user_id), friend_requests.friend_id.like(friend_id))).first()
+        db.session.delete(obj)
+        db.session.commit()
         
     if 'search_friend' in request.form:
         print("boo")
