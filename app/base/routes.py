@@ -418,6 +418,13 @@ def transactions_page():
         )
         
         friend_obj = friends_bs.query.filter(and_(friends_bs.user_id == trans_d.from_id, friends_bs.friend_id == trans_d.to_id)).first()
+        friend_obj.amount = str(float(friend_obj.amount) + float(trans_d.amount))
+        db.session.commit()
+    
+        db.session.add(data)
+        db.session.commit()
+        
+        friend_obj = friends_bs.query.filter(and_(friends_bs.user_id == trans_d.to_id, friends_bs.friend_id == trans_d.from_id)).first()
         friend_obj.amount = str(float(friend_obj.amount) - float(trans_d.amount))
         db.session.commit()
     
@@ -437,13 +444,11 @@ def transactions_page():
 
     if 'decline' in request.form:
         print ("hello")
-        name_id = request.form['decline']
-        user_id = current_username
-        friend_id= name_id
-        obj = friend_requests.query.filter( and_(friend_requests.user_id.like(user_id), friend_requests.friend_id.like(friend_id))).first()
-        db.session.delete(obj)
+        id = request.form['decline']
+        trans_d = pending_transactions.query.filter_by(id=id).first()
+        db.session.delete(trans_d)
         db.session.commit()
-    
+
     return render_template('views/transactions.html', to = pending_transactions_form, to_confirmed = transactions_form)
 
 
