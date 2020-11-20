@@ -330,12 +330,18 @@ def generate_friends_list():
     
     pending_friends_form = friend_requests.query.filter_by(user_id=current_username)
     
+    pending_friends_form1 = friend_requests.query.filter_by(friend_id=current_username)
+    
     friends1 = [friend.friend_id for friend in friends_form]
     print(friends1)
+    friends2 = [friend.user_id for friend in pending_friends_form1]
+    friends3 = [friend.friend_id for friend in pending_friends_form]
+    print(friends2)
+    print(friends3)
     all_users = User.query.filter( and_ (User.username != current_username, User.username not in friends1)).all()
     other_users=[]
     for ouser in all_users:
-        if ouser.username not in friends1:
+        if (ouser.username not in friends1) and (ouser.username not in friends2) and (ouser.username not in friends3) :
             other_users.append(ouser.username)
     print(other_users)
     
@@ -403,6 +409,12 @@ def generate_friends_list():
         tar = request.form['target_username']
         print("boo")
         print(tar)
+        data = friend_requests(
+            tar,
+            current_username
+        )
+        db.session.add(data)
+        db.session.commit()
     
     
     return render_template('views/friends.html', current_friend = friends_form, pending_friend = pending_friends_form, other_users = other_users)
@@ -471,7 +483,18 @@ def transactions_page():
         print(var)
         print(var2)
         print(var3)
-        
+        today = date.today()
+        today_date = today.strftime("%d/%m/%Y")
+        print(today_date)
+        data_new = pending_transactions(
+            current_username,
+            var2,
+            var,
+            today_date,
+            var3
+        )
+        db.session.add(data_new)
+        db.session.commit()
 
     return render_template('views/transactions.html', to = pending_transactions_form, to_confirmed = transactions_form, from_confirmed = transactions_form_from , confirmed_friendl = friends_form)
 
