@@ -29,9 +29,15 @@
                                 </div>
                             </div>
                         </div>
+                        {% if friend.amount >= "0" %}
                         <div class="btnx-icon badge badge-success align-self-center ">
                             {{ friend.amount }}
                         </div>
+                        {% else %}
+                        <div class="btnx-icon badge badge-danger align-self-center ">
+                            {{ friend.amount }}
+                        </div>
+                        {% endif %}
                     </div>
                     {% endfor %}
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>

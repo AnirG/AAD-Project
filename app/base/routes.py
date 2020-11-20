@@ -428,13 +428,13 @@ def transactions_page():
 
     current_username = current_user._get_current_object().username
     
-    transactions_form = confirmed_transactions.query.filter_by(to_id=current_username).order_by(confirmed_transactions.date_p.desc())
-    
-    transactions_form_from = confirmed_transactions.query.filter_by(from_id=current_username).order_by(confirmed_transactions.date_p.desc())
+    transactions_form = confirmed_transactions.query.filter(or_(confirmed_transactions.to_id == current_username, confirmed_transactions.from_id == current_username)).order_by(confirmed_transactions.date_p.desc())
     
     pending_transactions_form = pending_transactions.query.filter_by(to_id=current_username).order_by(pending_transactions.date_p.desc())
     
     friends_form = friends_bs.query.filter_by(user_id=current_username)
+    
+    print(transactions_form)
     
     if 'accept' in request.form:
         print ("hiiiiii")
@@ -496,7 +496,7 @@ def transactions_page():
         db.session.add(data_new)
         db.session.commit()
 
-    return render_template('views/transactions.html', to = pending_transactions_form, to_confirmed = transactions_form, from_confirmed = transactions_form_from , confirmed_friendl = friends_form)
+    return render_template('views/transactions.html',current_username = current_username, to = pending_transactions_form, to_confirmed = transactions_form, confirmed_friendl = friends_form)
 
 ## Errors
 

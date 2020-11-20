@@ -24,14 +24,25 @@
                             <div class="row d-flex">
                                 <div class="col-6 text-left ">
                                     <div class="user-list-item">
+                                        {% if friend.to_id == current_username %}
                                         {{ friend.from_id }}
+                                        {% else %}
+                                        {{ friend.to_id }}
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        {% if friend.to_id == current_username %}
                         <div class="btnx-icon badge badge-success align-self-center ">
                             {{ friend.amount }}
                         </div>
+                        {% else %}
+                        <div class="btnx-icon badge badge-danger align-self-center ">
+                            {{ friend.amount }}
+                        </div>
+                        {% endif %}
+                        
                     </div>
                     {% endfor %}
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>
