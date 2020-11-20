@@ -330,6 +330,16 @@ def generate_friends_list():
     
     pending_friends_form = friend_requests.query.filter_by(user_id=current_username)
     
+    friends1 = [friend.friend_id for friend in friends_form]
+    print(friends1)
+    all_users = User.query.filter( and_ (User.username != current_username, User.username not in friends1)).all()
+    other_users=[]
+    for ouser in all_users:
+        if ouser.username not in friends1:
+            other_users.append(ouser)
+    print(other_users)
+    
+    
     if 'accept' in request.form:
         print ("hiiiiii")
         name_id = request.form['accept']
@@ -393,7 +403,7 @@ def generate_friends_list():
         print("boo")
     
     
-    return render_template('views/friends.html', current_friend = friends_form, pending_friend = pending_friends_form)
+    return render_template('views/friends.html', current_friend = friends_form, pending_friend = pending_friends_form, other_users = other_users)
 
 
 
@@ -404,9 +414,13 @@ def transactions_page():
 
     current_username = current_user._get_current_object().username
     
-    transactions_form = confirmed_transactions.query.filter_by(to_id=current_username)
+    transactions_form = confirmed_transactions.query.filter_by(to_id=current_username).order_by(confirmed_transactions.date_p.desc())
     
-    pending_transactions_form = pending_transactions.query.filter_by(to_id=current_username).all()
+    transactions_form_from = confirmed_transactions.query.filter_by(from_id=current_username).order_by(confirmed_transactions.date_p.desc())
+    
+    pending_transactions_form = pending_transactions.query.filter_by(to_id=current_username).order_by(pending_transactions.date_p.desc())
+    
+    friends_form = friends_bs.query.filter_by(user_id=current_username)
     
     if 'accept' in request.form:
         print ("hiiiiii")
@@ -437,14 +451,6 @@ def transactions_page():
         db.session.add(data)
         db.session.commit()
 
-        # data2 = pending_transactions(
-        #     trans_d.from_id,
-        #     trans_d.to_id,
-        #     trans_d.amount,
-        #     trans_d.date_p,
-        #     trans_d.comment
-        # )
-   
         db.session.delete(trans_d)
         db.session.commit()
 
@@ -454,68 +460,18 @@ def transactions_page():
         trans_d = pending_transactions.query.filter_by(id=id).first()
         db.session.delete(trans_d)
         db.session.commit()
+        
+    if 'update_now' in request.form:
+        print("lol")
+        var = request.form['amount_inp']
+        var2 = request.form['friend_name']
+        var3 = request.form['comments_inp']
+        print(var)
+        print(var2)
+        print(var3)
+        
 
-    return render_template('views/transactions.html', to = pending_transactions_form, to_confirmed = transactions_form)
-
-
-
-'''
-@blueprint.route('accept friend',methods = ['GET','POST'])
-def accept_friend():
-    if not current_user.is_authenticated:
-        return redirect(url_for('base_blueprint.login'))
-
-    form = friends_form(request.form)
-
-    user_id = request.form['user']
-    friend_id= request.form['friends']
-    amount = 0
-
-    p_friend = friend_bs(**request.form)
-    db.session.add(p_friend)
-    db.sessiomn.commit()
-
-    db_config = read_db_config()
-    query = "DELETE FROM friend_requests WHERE user_id = %s and friend_id = %d"
-
-    try:
-	    del_request = friend_requests(**db_config)
-	    cursor = del_request.cursor()
-	    cursor.execute(query,(user_id),(friend_id))
-	    del_request.commit()
-    
-    except Error as error:
-    	print(error)
-
-    finally:
-    	cursor.close()
-    	del_request.close()
-
-    return_render_template( '', msg = 'Friend request accepted', form = pending_friends_form)\
-
-@blueprint.route('decline friend',methods = ['GET','POST'])
-def decline_friend:
-	if not current_user.is_authenticated:
-		return redirect(url_for('base_blueprint.login'))
-
-	db_config = read_db_config()
-	query = "DELETE FROM friend_requests WHERE user_id = %s and friend_id = %d"
-
-	try:
-		del_request = friend_requests(**db_config)
-		cursor = del_request.cursor()
-	    cursor.execute(query,(user_id),(friend_id))
-	    del_request.commit()
-    
-    except Error as error:
-    	print(error)
-
-    finally:
-    	cursor.close()
-    	del_request.close()
-
-    return_render_template( '', msg = 'Friend request declined', form = pending_friends_form)
-'''
+    return render_template('views/transactions.html', to = pending_transactions_form, to_confirmed = transactions_form, from_confirmed = transactions_form_from , confirmed_friendl = friends_form)
 
 ## Errors
 

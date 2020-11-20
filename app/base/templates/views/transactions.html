@@ -114,6 +114,7 @@
                         </div>
                     </div>
                     <div class="yoo-height-b25 yoo-height-lg-b25"></div>
+                    <form method="POST">
                     <div class="yoo-form-field-wrap yoo-style1">
                         <label class="yoo-form-field-label yoo-type1">Amount</label>
                         <div class="input-group form-group-sm">
@@ -126,10 +127,10 @@
                         <label class="yoo-form-field-label yoo-type1">Receiver</label>
                         <div class="input-group form-group-sm">
                           <div class="yoo-select">
-                            <select id="inputState" class="form-control">
-                              <option >manas</option>
-                              <option>vj</option>
-                              <option>kanesh</option>
+                            <select id="inputState" class="form-control" name ="friend_name">
+                              {% for friend_l in confirmed_friendl %}
+                              <option value="{{ friend_l.friend_id }}" >{{ friend_l.friend_id }}</option>
+                              {% endfor %}
                             </select>
                           </div>
                         </div>
@@ -143,8 +144,9 @@
                     </div>
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                     <div class="yoo-profile-btn-group yoo-style1">
-                        <a href="transaction_history.htmlaaa" class="yoo-profile-btn yoo-style1 yoo-color2">Update Now</a>                        
+                        <button type="submit" class="yoo-profile-btn yoo-style1 yoo-color2" name = "update_now" >Update Now</button>                        
                     </div>
+                </form>
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                 </div>
             </div>

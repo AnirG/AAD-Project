@@ -108,9 +108,16 @@
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                     <div class="yoo-sidebar-search">
                         <form action="#" class="yoo-search yoo-style1 yoo-search-md">
-                          <input type="text" placeholder="Search..." class="yoo-search-input">
+                          <input type="text" placeholder="Search..." class="yoo-search-input" id="friend_search">
                           <button class="yoo-search-submit" name ="search_friend" type="submit" ><ion-icon name="search"></ion-icon></button>                         
                         </form>
+                        <div>
+                            <ul class="list-group" >
+                                {% for i_var in other_users %}
+                                <li class="list-group-item">{{ i_var }}</li>
+                                {% endfor %}
+                              </ul>
+                        </div>
                       </div>
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                 </div>
