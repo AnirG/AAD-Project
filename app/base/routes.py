@@ -356,7 +356,7 @@ def generate_friends_list():
         #p_friend = friends_bs(**request.form)
         db.session.add(data)
         db.session.commit()
-        db.session.add(data)
+        db.session.add(data2)
         db.session.commit()
         
         obj = friend_requests.query.filter( and_(friend_requests.user_id.like(user_id), friend_requests.friend_id.like(friend_id))).first()
