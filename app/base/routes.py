@@ -324,9 +324,14 @@ def show_friends():
     current_username = current_user._get_current_object().username
     friends_list = friends_bs.query.filter_by(user_id=current_username)
 
+    debt_dict={}
+
     if request.method == "POST":
-        print('entered')
-        print(request.form.getlist('check_box'))
+        friends_list = request.form.getlist('check_box')
+        debts_list = friends_bs.query.filter_by(user_id=current_username)
+        for guy in friends_list:
+            net_balance = friends_bs.query.filter(and_(friends_bs.user_id == current_username, friends_bs.friend_id == guy)).first().amount
+            debt_dict[guy] = net_balance
 
 
     return render_template('views/settle.html',friends=friends_list)
