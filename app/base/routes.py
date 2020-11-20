@@ -319,6 +319,20 @@ def createTransaction():
     return render_template('views/make_transaction.html', form=MakeTransactionCrypto, public_key = user.public_key, msg_success=msg_success, msg_warning=msg_warning)
 
 
+@blueprint.route('settle',methods=['GET','POST'])
+def show_friends():
+    current_username = current_user._get_current_object().username
+    friends_list = friends_bs.query.filter_by(user_id=current_username)
+
+    if request.method == "POST":
+        print('entered')
+        print(request.form.getlist('check_box'))
+
+
+    return render_template('views/settle.html',friends=friends_list)
+
+
+
 @blueprint.route('friends_list',methods=['GET','POST'])
 def generate_friends_list():
     if not current_user.is_authenticated:
