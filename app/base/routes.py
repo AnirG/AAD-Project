@@ -336,7 +336,7 @@ def generate_friends_list():
     other_users=[]
     for ouser in all_users:
         if ouser.username not in friends1:
-            other_users.append(ouser)
+            other_users.append(ouser.username)
     print(other_users)
     
     
@@ -400,7 +400,9 @@ def generate_friends_list():
         db.session.commit()
         
     if 'search_friend' in request.form:
+        tar = request.form['target_username']
         print("boo")
+        print(tar)
     
     
     return render_template('views/friends.html', current_friend = friends_form, pending_friend = pending_friends_form, other_users = other_users)

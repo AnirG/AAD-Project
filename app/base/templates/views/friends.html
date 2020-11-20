@@ -107,14 +107,24 @@
                 <div class="yoo-padd-lr-20">
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                     <div class="yoo-sidebar-search">
-                        <form action="#" class="yoo-search yoo-style1 yoo-search-md">
-                          <input type="text" placeholder="Search..." class="yoo-search-input" id="friend_search">
-                          <button class="yoo-search-submit" name ="search_friend" type="submit" ><ion-icon name="search"></ion-icon></button>                         
+                        <form  class="yoo-search yoo-style1 yoo-search-md" >
+                          <input type="text" placeholder="Search..." class="yoo-search-input" id="friend_search" oninput="performSearch(this.value)" autocomplete="off">
+                          <button type="button" class="yoo-search-submit"><ion-icon name="search"></ion-icon></button> 
                         </form>
-                        <div>
-                            <ul class="list-group" >
+                          <div>
+                            <ul class="list-group" id="list_friend">
                                 {% for i_var in other_users %}
-                                <li class="list-group-item">{{ i_var }}</li>
+                                <li class="list-group-item">
+                                <div class="w-100 d-flex flex-row justify-content-between">
+                                    <span>{{ i_var }}</span>
+                                    <form method="POST">
+                                        <input name="target_username" type="hidden" value="{{ i_var }}" />
+                                        <button name="search_friend" class="btn btn-primary">
+                                            ADD
+                                        </button>
+                                    </form>
+                                </div>
+                            </li>
                                 {% endfor %}
                               </ul>
                         </div>
@@ -126,4 +136,22 @@
         <div class="col-lg-3"></div>
     </div>
 </div>
+<script>
+function performSearch(searchTerm) {
+    var searchList = {{ other_users|tojson|safe }};
+    var searchResults = document.getElementById("list_friend");
+    var filteredList = searchList.filter((obj) => obj.includes(searchTerm));
+
+    while (searchResults.firstChild) {
+        searchResults.removeChild(searchResults.firstChild);
+    }
+
+    filteredList.forEach((item, idx) => {
+        var li = document.createElement("li");
+        li.innerHTML = `<div class="w-100 d-flex flex-row justify-content-between"><span>${item}</span><form method="POST"><input name="target_username" type="hidden" value="${item}"/><button name="search_friend" class="btn btn-primary"> ADD </button></form></div>`;
+        li.classList.add("list-group-item");
+        searchResults.append(li);
+    });
+}
+</script>
 {% endblock content %}
