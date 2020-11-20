@@ -348,11 +348,17 @@ def generate_friends_list():
             friend_id,
             amount
         )
-
+        data2 = friends_bs(
+            friend_id,
+            user_id,
+            amount
+        )
         #p_friend = friends_bs(**request.form)
         db.session.add(data)
         db.session.commit()
-
+        db.session.add(data)
+        db.session.commit()
+        
         obj = friend_requests.query.filter( and_(friend_requests.user_id.like(user_id), friend_requests.friend_id.like(friend_id))).first()
         db.session.delete(obj)
         db.session.commit()
