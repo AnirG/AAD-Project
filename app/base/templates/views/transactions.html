@@ -19,7 +19,16 @@
                 <div class="yoo-padd-lr-20">
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                     {% for friend in to_confirmed %}
+                   
+
                     <div class="yoo-medias yoo-style1 yoo-type1 d-flex flex-row align-items-center">
+                        {% if not friend.to_id %}
+                        <div class="yoo-media-meta">
+                            <div class="row">
+                                <div class="alert alert-secondary col-12 text-center"> {{ friend.comment }} </div> 
+                            </div>
+                        </div>
+                        {% else %}
                         <div class="yoo-media-meta">
                             <div class="row d-flex">
                                 <div class="col-6 text-left ">
@@ -39,8 +48,9 @@
                         </div>
                         {% else %}
                         <div class="btnx-icon badge badge-danger align-self-center ">
-                            {{ friend.amount }}
+                           -{{ friend.amount }}
                         </div>
+                        {% endif %}
                         {% endif %}
                         
                     </div>
@@ -49,6 +59,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-3"></div>
     </div>
 </div>
@@ -135,7 +146,7 @@
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                     <!-- make the receiver a dropdown from list of friends -->
                     <div class="yoo-form-field-wrap yoo-style1">
-                        <label class="yoo-form-field-label yoo-type1">Receiver</label>
+                        <label class="yoo-form-field-label yoo-type1">Sender</label>
                         <div class="input-group form-group-sm">
                           <div class="yoo-select">
                             <select id="inputState" class="form-control" name ="friend_name">

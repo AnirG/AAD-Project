@@ -17,6 +17,7 @@ from flask_login import (
 
 from app.codes.ecdsa_string_latest import *
 from app.codes.SHA256 import *
+from app.codes.settlement_algo import Settle
 import random
 from app import db, login_manager
 from app.base import blueprint
@@ -343,8 +344,30 @@ def show_friends():
                     else:
                          return render_template('views/settle.html',alert_msg= guy_a + " is not friend with " + friend, friends=friends_list)
 
-            return_array.append([guy_a, net_debt])
-                        
+            return_array.append([guy_a, -1*net_debt])
+            
+        today = date.today()
+        today_date = today.strftime("%d/%m/%Y")
+
+
+        settlement_data = Settle(return_array,40)[1]
+        
+        for guy_a in check_list:
+            net_debt = 0
+            comment = "settled with "
+            for friend in check_list:
+                if guy_a != friend:
+                    comment = comment + friend + ' '
+                    obj = friends_bs.query.filter(and_(friends_bs.user_id == guy_a, friends_bs.friend_id == friend)).first()
+                    obj.amount = "0"
+                    db.session.commit()
+                    
+            data = confirmed_transactions(guy_a, '', '', today_date, comment) 
+            db.session.add(data)
+            db.session.commit()
+
+
+        return render_template('views/settle.html',friends=friends_list, success_msg="Your settlement amounts have been computed")
 
 
         print(return_array)
@@ -464,7 +487,7 @@ def transactions_page():
 
     current_username = current_user._get_current_object().username
     
-    transactions_form = confirmed_transactions.query.filter(or_(confirmed_transactions.to_id == current_username, confirmed_transactions.from_id == current_username)).order_by(confirmed_transactions.date_p.desc())
+    transactions_form = confirmed_transactions.query.filter(or_(confirmed_transactions.to_id == current_username, confirmed_transactions.from_id == current_username)).order_by(confirmed_transactions.id.desc())
     
     pending_transactions_form = pending_transactions.query.filter_by(to_id=current_username).order_by(pending_transactions.date_p.desc())
     
