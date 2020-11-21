@@ -324,14 +324,31 @@ def show_friends():
     current_username = current_user._get_current_object().username
     friends_list = friends_bs.query.filter_by(user_id=current_username)
 
-    debt_dict={}
+    debt_dict = {}
 
     if request.method == "POST":
-        friends_list = request.form.getlist('check_box')
-        debts_list = friends_bs.query.filter_by(user_id=current_username)
-        for guy in friends_list:
-            net_balance = friends_bs.query.filter(and_(friends_bs.user_id == current_username, friends_bs.friend_id == guy)).first().amount
-            debt_dict[guy] = net_balance
+        check_list = request.form.getlist('check_box')
+        check_list.append(current_username)
+        #debts_list = friends_bs.query.filter_by(user_id=current_username)
+
+        return_array = []
+
+        for guy_a in check_list:
+            net_debt = 0
+            for friend in check_list:
+                if guy_a != friend:
+                    foo = friends_bs.query.filter(and_(friends_bs.user_id == guy_a, friends_bs.friend_id == friend)).first()
+                    if foo:
+                        net_debt += int(float(foo.amount))
+                    else:
+                         return render_template('views/settle.html',alert_msg= guy_a + " is not friend with " + friend, friends=friends_list)
+
+            return_array.append([guy_a, net_debt])
+                        
+
+
+        print(return_array)
+    
 
 
     return render_template('views/settle.html',friends=friends_list)

@@ -78,43 +78,29 @@
                             <div class="yoo-height-b20 yoo-height-lg-b20"></div>
                             <div class="d-flex flex-row justify-content-center">
 
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal1">Settle</button>
-                            <div class="modal fade" id="modal1">
-                                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title">Transaction Details</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <ion-icon name="close"></ion-icon>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                          <figure class="highlight"><pre><code class="language-html" data-lang="html">
-
-
-
-
-
-                                        </div>
-                                        <!-- <div class="modal-footer">
-                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                                        </div> -->
-                                    </div>
-                                </div>
-                            </div>
-
-
+                            <button type="submit" class="btn btn-success">Settle</button>
 
 
                         </div>
                     </div>                    
                 </div>
                     </form>
-                
             </div>
         </div>
+
         <div class="yoo-height-b30 yoo-height-lg-b30"></div>
+
+
     </div>
     <div class="col-lg-3"></div>
 </div>
+
+{% if alert_msg %}
+<div class="alert alert-warning"> 
+    <strong>Warning!</strong> {{ alert_msg }} 
+</div> 
+{% endif %}
+
+
+
 {% endblock content %}
