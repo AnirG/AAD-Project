@@ -350,8 +350,10 @@ def show_friends():
         today_date = today.strftime("%d/%m/%Y")
 
 
-        settlement_data = Settle(return_array,40)[1]
-        
+        settlement_data = Settle(return_array,40)[0]            # 40 can be tweaked around for the cap amount.
+
+
+
         for guy_a in check_list:
             net_debt = 0
             comment = "settled with "
@@ -367,7 +369,7 @@ def show_friends():
             db.session.commit()
 
 
-        return render_template('views/settle.html',friends=friends_list, success_msg="Your settlement amounts have been computed")
+        return render_template('views/settle.html',friends=friends_list, success_msg=settlement_data)
 
 
         print(return_array)

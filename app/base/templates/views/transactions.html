@@ -3,7 +3,7 @@
 <link rel="stylesheet" type="text/css" href="/static/assets/css/jqvmap.min.css" />
 <link rel="stylesheet" type="text/css" href="/static/assets/css/friends.css" />
 {% endblock stylesheets %}
-<{% block content %}
+{% block content %}
 <div class="row">
     <div class="col-lg-3"></div>
     <div class="col-lg-6 my-5">
@@ -18,6 +18,7 @@
             <div class="yoo-card-body">
                 <div class="yoo-padd-lr-20">
                     <div class="yoo-height-b20 yoo-height-lg-b20"></div>
+                    
                     {% for friend in to_confirmed %}
                    
 
@@ -25,7 +26,8 @@
                         {% if not friend.to_id %}
                         <div class="yoo-media-meta">
                             <div class="row">
-                                <div class="alert alert-secondary col-12 text-center"> {{ friend.comment }} </div> 
+
+                                <div class="alert alert-secondary text-center">{{ friend.comment }}</div>
                             </div>
                         </div>
                         {% else %}
