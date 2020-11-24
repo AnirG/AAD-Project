@@ -285,3 +285,25 @@ INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:25] "[37mGET /friends_list HTTP/
 INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:30] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
 INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:31] "[37mPOST /register_crypto HTTP/1.1[0m" 200 -
 INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:33] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 390-621-185
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:17:43] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:17:43] "[37mGET /login HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:17:49] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:17:50] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:17:50] "[32mGET /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:17:50] "[37mGET /friends_list HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:17:58] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:01] "[37mPOST /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:33] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:36] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:36] "[37mGET /login HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:45] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:45] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:45] "[32mGET /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:45] "[37mGET /friends_list HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:52] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:54] "[37mPOST /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:18:59] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
