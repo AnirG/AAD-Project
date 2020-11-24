@@ -5,8 +5,7 @@ Automat==0.8.0
 bcrypt==3.2.0
 blinker==1.4
 certifi==2019.11.28
-cffi
-command-not-found
+cffi==1.14.3
 configobj==5.0.6
 constantly==15.1.0
 cryptography==2.8
