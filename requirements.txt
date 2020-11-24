@@ -13,7 +13,6 @@ DateTime==4.3
 dbus-python==1.2.16
 distlib==0.3.0
 distro==1.4.0
-distro-info===0.23ubuntu1
 dnspython==2.0.0
 email-validator==1.1.1
 entrypoints==0.3
