@@ -5,7 +5,7 @@
         <div class="yoo-main-header-left">
           <!-- For Site Title (LOGO COMES HERE)-->
           <!-- <span class="yoo-site-title">
-            <a href="index.html">Logo</a>
+            <a href="\index_crypto"><ion-icon name="mail"></ion-icon></a>
           </span> -->
         </div>
         <div class="yoo-main-header-right">
@@ -20,10 +20,15 @@
               </ul>
             </nav> -->
             <!-- .yoo-nav -->
+            <div class=" yoo-main-header yoo-ex-nav yoo-style1">
+              <h4 style="color:azure;">
+                  Crypto
+              </h4>
+            </div>
           </div>
           <!-- .yoo-nav-wrap -->
           <ul class="yoo-ex-nav yoo-style1 yoo-flex yoo-mp0">
-            <li>
+            <!-- <li>
               <div class="yoo-toggle-body yoo-message-area yoo-style1">
                 <span class="yoo-toggle-btn yoo-ex-nav-btn yoo-message-btn">
                   <ion-icon name="mail"></ion-icon>
@@ -197,7 +202,7 @@
                   <a href="#" class="yoo-btn yoo-style2">SEE ALL <ion-icon name="chevron-forward"></ion-icon></a>
                 </div>
               </div>
-            </li>
+            </li> -->
             <li>
               <div class="yoo-toggle-body yoo-profile-nav yoo-style1">
                 <div class="yoo-toggle-btn yoo-profile-nav-btn">
@@ -212,17 +217,17 @@
                   </div>
                 </div>
                 <ul class="yoo-dropdown yoo-style1">
-                  <li>
+                  <!-- <li>
                     <a href="#"><ion-icon name="person-circle"></ion-icon>My Profile</a>
                   </li>
                   <li>
                     <a href="#"><ion-icon name="settings"></ion-icon>Settings</a>
+                  </li> -->
+                  <li>
+                    <a href="/friends_list"><ion-icon name="cash-outline"></ion-icon>Better Split</a>
                   </li>
                   <li>
-                    <a href="/index"><ion-icon name="videocam"></ion-icon>Better Split</a>
-                  </li>
-                  <li>
-                    <a href="/register_crypto"><ion-icon name="help-circle"></ion-icon>Crypto</a>
+                    <a href="/register_crypto"><ion-icon name="hammer"></ion-icon>Crypto</a>
                   </li>
                   <li class="yoo-dropdown-cta">
                       <a href={{ url_for('base_blueprint.logout') }} >Sign Out</a>

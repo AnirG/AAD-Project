@@ -25,11 +25,11 @@ def verify_Signature(message, sign64, publicKey_input):
     return (Ecdsa.verify(message, signature, publicKey))
 
 
-p1 = generate_KeyPair()
-p2 = generate_KeyPair()
-print(len(p1[0]))
-print(len(p1[1]))
-message = "chandan bond"
+# p1 = generate_KeyPair()
+# p2 = generate_KeyPair()
+# print(len(p1[0]))
+# print(len(p1[1]))
+# message = "chandan bond"
 
 # a = input()
 # b = input()

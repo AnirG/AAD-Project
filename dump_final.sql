@@ -1,3 +1,4 @@
+PRAGMA foreign_keys=OFF;
 BEGIN TRANSACTION;
 CREATE TABLE IF NOT EXISTS "User" (
 	id INTEGER NOT NULL, 
@@ -31,6 +32,8 @@ private_key VARCHAR UNIQUE,
 public_key VARCHAR UNIQUE,
 net_balance VARCHAR
 );
+INSERT INTO User_Crypto VALUES(3,'vijay','60391611808233396924504171732799085747413100590409132761604958926626803581421','7106469907006712108043421764464517986850857491865775559380180240878675670070.28912862890370921163983526430049309651080988304613688281776025925084651211807.0','1025.0');
+INSERT INTO User_Crypto VALUES(1,'anir','36618697430794806279310709439771316600364410440854006460425799757630403928494','32113560881369808816791660435440266669803884866128612046206384695475857168005.33274877329529114296564975649391010931202237236767036010804478017707186753242.0','975.0');
 CREATE TABLE IF NOT EXISTS "Public_Ledger" (
 id INTEGER PRIMARY KEY AUTOINCREMENT,
 pbk_sender STRING,
@@ -44,6 +47,7 @@ nonce STRING,
 digital_signature STRING
 );
 INSERT INTO Public_Ledger VALUES(1,'','','','','','',0,'','');
+INSERT INTO Public_Ledger VALUES(2,'32113560881369808816791660435440266669803884866128612046206384695475857168005.33274877329529114296564975649391010931202237236767036010804478017707186753242.0','7106469907006712108043421764464517986850857491865775559380180240878675670070.28912862890370921163983526430049309651080988304613688281776025925084651211807.0',25,'24/11/2020','1st transaction',0,'0f232be08926602e3f02191e496a6f02c33ad65ee482ac4a52e2f73eb6e014e6',4,'MEYCIQDNkFICYdrQ3vPMamWEWmxaUSj01z+McbFrnndZLTKasAIhAJGw+rN3dy0EmB7e+VyGuxla20ONZ32Ux5k/cYIoCs83');
 CREATE TABLE IF NOT EXISTS "friends_bs" (
 	user_id VARCHAR,
 	friend_id VARCHAR,
@@ -53,8 +57,8 @@ INSERT INTO friends_bs VALUES('anir','ganesh','0');
 INSERT INTO friends_bs VALUES('ganesh','anir','0');
 INSERT INTO friends_bs VALUES('vijay','ganesh','0');
 INSERT INTO friends_bs VALUES('ganesh','vijay','0');
-INSERT INTO friends_bs VALUES('vijay','anir','1000.0');
-INSERT INTO friends_bs VALUES('anir','vijay','-1000.0');
+INSERT INTO friends_bs VALUES('vijay','anir','0');
+INSERT INTO friends_bs VALUES('anir','vijay','0');
 CREATE TABLE IF NOT EXISTS "friend_requests" (
 	user_id VARCHAR,
 	friend_id VARCHAR
@@ -90,9 +94,22 @@ CREATE TABLE IF NOT EXISTS "confirmed_transactions" (
 	date_p VARCHAR
 );
 INSERT INTO confirmed_transactions VALUES(1,'vijay','anir','1000','1st transaction','22/11/2020');
+INSERT INTO confirmed_transactions VALUES(2,'ganesh','','','settled with anir vijay ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(3,'anir','','','settled with ganesh vijay ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(4,'vijay','','','settled with ganesh anir ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(5,'ganesh','','','settled with anir vijay ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(6,'anir','','','settled with ganesh vijay ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(7,'vijay','','','settled with ganesh anir ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(8,'vijay','anir','1000','22','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(9,'ganesh','','','settled with vijay anir ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(10,'vijay','','','settled with ganesh anir ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(11,'anir','','','settled with ganesh vijay ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(12,'anir','vijay','1000','1','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(13,'anir','','','settled with vijay ','24/11/2020');
+INSERT INTO confirmed_transactions VALUES(14,'vijay','','','settled with anir ','24/11/2020');
 DELETE FROM sqlite_sequence;
-INSERT INTO sqlite_sequence VALUES('Transaction_Crypto',1);
-INSERT INTO sqlite_sequence VALUES('Public_Ledger',1);
-INSERT INTO sqlite_sequence VALUES('pending_transactions',2);
-INSERT INTO sqlite_sequence VALUES('confirmed_transactions',1);
+INSERT INTO sqlite_sequence VALUES('Transaction_Crypto',2);
+INSERT INTO sqlite_sequence VALUES('Public_Ledger',2);
+INSERT INTO sqlite_sequence VALUES('pending_transactions',4);
+INSERT INTO sqlite_sequence VALUES('confirmed_transactions',14);
 COMMIT;

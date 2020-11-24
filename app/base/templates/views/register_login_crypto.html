@@ -3,14 +3,44 @@
 {% block content %}  
 
 {% if msg %}
-<form method="post">
-    <button type="submit" name = "register" ripple="ripple" ripple-color="#fff" class="btn btn-primary btn-lg">Create a Cryto Account!</button>
-    {% if pvk %}
-    <div class="alert alert-success"> 
-      <strong>Your private key is: {{ pvk }}</strong>
-    </div>
-    {% endif %}
-</form>
+    <form method="post">
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="yoo-vertical-middle">
+              <div class="yoo-vertical-middle-in">
+                <div class="yoo-signup-img yoo-style1">
+                  <img src="/static/assets/img/signup/01.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div><!-- .col -->
+          <div class="col-lg-5">
+            <div class="yoo-vertical-middle">
+              <div class="yoo-vertical-middle-in">
+                
+                <form method="post" action="" class="yoo-form yoo-style1">
+    
+                  <h2 class="yoo-form-title">
+                      Register for crypto
+                  </h2>
+                  <div class="yoo-height-b15 yoo-height-lg-b15"></div>
+                  <div class="yoo-form-separator"> &nbsp; </div>
+                  <div class="yoo-height-b15 yoo-height-lg-b15"></div>
+    
+                  <button type="submit" name = "register" ripple="ripple" ripple-color="#fff" class="btn btn-primary btn-lg">Create a Cryto Account!</button>
+                  {% if pvk %}
+                  <div class="alert alert-success"> 
+                    <strong>Your private key is: {{ pvk }}</strong>
+                  </div>
+                  {% endif %}
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     {% else %}
     
 

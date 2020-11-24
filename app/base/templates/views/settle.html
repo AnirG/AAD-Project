@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="/static/assets/css/friends.css" />
 <link rel="stylesheet" type="text/css" href="/static/assets/css/settle.css" />
 {% endblock stylesheets %}
-<{% block content %}
+{% block content %}
 <style>
     .checkbox-2x {
         transform: scale(1.5);
@@ -62,26 +62,18 @@
                             <div class="d-flex flex-row justify-content-center">
 
                             <button type="submit" class="btn btn-success">Settle</button>
-
-
                         </div>
                     </div>                    
                 </div>
                     </form>
             </div>
         </div>
-
         <div class="yoo-height-b30 yoo-height-lg-b30"></div>
-
-
     </div>
-    <div class="col-lg-3"></div>
 </div>
-
-
-
-
-<div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+</div>
+<!-- {% if success_msg %} -->
+<div class="modal-dialog modal-dialog-centered modal-lg" >
     <div class="modal-content">
         <div class="modal-header">
             <h5 class="modal-title">Transaction Details</h5>
@@ -91,18 +83,14 @@
         </div>
         <div class="modal-body">
           <figure class="highlight"><pre><code class="language-html" data-lang="html">
-
-            {{ success_msg }}
-
+            {% for query in success_msg %}
+<span>{{ query }}</span>
+            {% endfor %}
 
         </div>
-        <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div> -->
     </div>
 </div>
-</div>
-
+<!-- {% endif %} -->
 
 
 

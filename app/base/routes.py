@@ -66,7 +66,7 @@ def login():
     if not current_user.is_authenticated:
         return render_template( 'accounts/login.html',
                                 form=login_form)
-    return redirect(url_for('home_blueprint.index'))
+    return redirect('/friends_list')
 
 @blueprint.route('/register', methods=['GET', 'POST'])
 def register():
@@ -119,7 +119,10 @@ def showDashboard():
 
     current_username = current_user._get_current_object().username
     user = User_Crypto.query.filter_by(username=current_username).first()
-    return render_template('index_crypto.html', net_balance = user.net_balance)
+    pbk = User_Crypto.query.filter_by(username=current_username).first().public_key
+    query = Public_Ledger.query.filter(or_(Public_Ledger.pbk_sender == pbk,  Public_Ledger.pbk_receiver == pbk)).order_by(Public_Ledger.id.desc())
+
+    return render_template('index_crypto.html', net_balance = user.net_balance,query=query, pbk=pbk)
 
 
 @blueprint.route('/register_crypto', methods=['GET','POST'])
@@ -131,7 +134,7 @@ def register_for_crypto():
     current_username = current_user._get_current_object().username
 
     if User_Crypto.query.filter_by(username=current_username).first():
-        print("haha")
+
         if request.method == "POST":
             user = User_Crypto.query.filter_by(username=current_username).first().private_key
             print(user, request.form['private_key'])
@@ -162,11 +165,12 @@ def showTransactionHistory():
     if not current_user.is_authenticated:
         return redirect(url_for('base_blueprint.login'))
 
-    current_username = current_user._get_current_object().username
-    pbk = User_Crypto.query.filter_by(username=current_username).first().public_key
-    query = Public_Ledger.query.filter(or_(Public_Ledger.pbk_sender == pbk,  Public_Ledger.pbk_receiver == pbk)).order_by(Public_Ledger.id.desc())
+    # current_username = current_user._get_current_object().username
+    # pbk = User_Crypto.query.filter_by(username=current_username).first().public_key
+    # query = Public_Ledger.query.filter(or_(Public_Ledger.pbk_sender == pbk,  Public_Ledger.pbk_receiver == pbk)).order_by(Public_Ledger.id.desc())
    
-    return render_template('views/transaction_history.html', query=query, pbk=pbk)
+    # return render_template('views/transaction_history.html', query=query, pbk=pbk)
+    return redirect('\index_crypto')
 
 
 
@@ -369,7 +373,7 @@ def show_friends():
             db.session.commit()
 
 
-        return render_template('views/settle.html',friends=friends_list, success_msg=settlement_data)
+        return render_template('views/settle.html',friends=friends_list, success_msg=settlement_data,)
 
 
         print(return_array)

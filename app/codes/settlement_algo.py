@@ -56,7 +56,7 @@ def Settle(debt_input,limit = 500):
         inp = Sort_Tuple(inp)
     return (ans,ans_data)
 
-p =[('A',-50), ('B',-30), ('C',+10), ('D',+20), ('E',+40),('F',-100),('G',+110)]
-r = [('A',0),('B',0)]
-x = []
-print(Settle( p )[0])
+# p =[('A',-50), ('B',-30), ('C',+10), ('D',+20), ('E',+40),('F',-100),('G',+110)]
+# r = [('A',0),('B',0)]
+# x = []
+# print(Settle( p )[0])
