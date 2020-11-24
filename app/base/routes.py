@@ -156,8 +156,8 @@ def register_for_crypto():
             user = User_Crypto(current_username, pvk, pbk, id)
             db.session.add(user)
             db.session.commit()
-            return render_template('views/register_login_crypto.html', msg=msg, pvk=pvk) 
-        return render_template('views/register_login_crypto.html', msg=msg) 
+            return render_template('views/register_c.html', msg=msg, pvk=pvk) 
+        return render_template('views/register_c.html', msg=msg) 
         
 @blueprint.route('transaction_history',methods=['GET','POST'])
 def showTransactionHistory():

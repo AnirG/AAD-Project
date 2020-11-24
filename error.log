@@ -180,3 +180,108 @@ INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 12:20:07] "[37mGET /transactions_page 
 INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 12:20:11] "[37mPOST /transactions_page HTTP/1.1[0m" 200 -
 INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 12:20:15] "[37mGET /settle HTTP/1.1[0m" 200 -
 INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 12:20:20] "[37mPOST /settle HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 390-621-185
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[37mGET /login HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[36mGET /static/assets/css/fontawesome.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[36mGET /static/assets/css/bootstrap.min.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[36mGET /static/assets/css/iDashboard.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[36mGET /static/assets/js/jquery-1.12.4.min.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[36mGET /static/assets/js/bootstrap.bundle.min.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[36mGET /static/assets/js/smooth-scrollbar.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[36mGET /static/assets/js/iDashboard.js HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:03] "[36mGET /static/assets/img/signup/01.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:04] "[36mGET /static/assets/fonts/Inter-Regular.ttf HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:04] "[36mGET /static/assets/fonts/Inter-SemiBold.ttf HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:04] "[36mGET /static/assets/fonts/Inter-Medium.ttf HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:10] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:10] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:10] "[32mGET /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:10] "[37mGET /friends_list HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:10] "[36mGET /static/assets/css/jqvmap.min.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:10] "[36mGET /static/assets/css/friends.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:10] "[36mGET /static/assets/img/profile-pic.png HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 22:59:36] "[33mGET /register_crypto.html HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:16] "[33mGET /register_crypto.html HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:17] "[37mGET /static/assets/img/favicon.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:22] "[33mGET /register_chtml HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:29] "[33mGET /register_c.html HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:39] "[33mGET /friend.html HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:51] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:51] "[32mGET /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:51] "[37mGET /friends_list HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:53] "[37mGET /transactions_page HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:54] "[37mGET /settle HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:54] "[36mGET /static/assets/css/settle.css HTTP/1.1[0m" 304 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:55] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:00:55] "[37mGET /login HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:01:04] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:01:04] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:01:04] "[32mGET /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:01:04] "[37mGET /friends_list HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:01:34] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:01:34] "[37mGET /login HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:01:35] "[37mGET /register HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:04:04] "[33mGET /views/register_login_crypto.html HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:04:04] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:04:27] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:04:27] "[37mGET /login HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Detected change in '/home/vvv/AAD-Project/app/base/routes.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 390-621-185
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:08] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:08] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:08] "[32mGET /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:08] "[37mGET /friends_list HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:13] "[35m[1mGET /register_crypto HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:13] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:13] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:13] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:13] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:13] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:46] "[35m[1mGET /register_crypto HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:46] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:46] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:46] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:47] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:47] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:48] "[35m[1mGET /register_crypto HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:48] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:48] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:48] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:48] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:48] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:51] "[35m[1mGET /register_crypto HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:51] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:51] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:51] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:05:51] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:07:01] "[35m[1mGET /register_crypto HTTP/1.1[0m" 500 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:07:01] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:07:01] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:07:01] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:07:01] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:07:01] "[37mGET /register_crypto?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:07:35] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:07:35] "[37mGET /static/assets/img/favicon.png HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:07:47] "[37mPOST /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:08:07] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:08:11] "[32mPOST /register_crypto HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:08:11] "[37mGET /public_ledger HTTP/1.1[0m" 200 -
+INFO:werkzeug: * Detected change in '/home/vvv/AAD-Project/app/base/routes.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 390-621-185
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:17] "[32mGET /logout HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:17] "[37mGET /login HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:25] "[32mPOST /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:25] "[32mGET / HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:25] "[32mGET /login HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:25] "[37mGET /friends_list HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:30] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:31] "[37mPOST /register_crypto HTTP/1.1[0m" 200 -
+INFO:werkzeug:127.0.0.1 - - [24/Nov/2020 23:10:33] "[37mGET /register_crypto HTTP/1.1[0m" 200 -
